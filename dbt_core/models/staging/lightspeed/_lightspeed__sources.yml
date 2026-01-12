@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: lightspeed_raw
+    database: "{{ var('project_id', target.project) }}"
+    schema: lightspeed_raw
+    description: Raw data from Lightspeed POS system (ingested via Airbyte)
+    
+    tables:
+      - name: categories
+        description: Product categories
+        
+      - name: item_matrices
+        description: Item matrix/variant definitions
+        
+      - name: item_shops
+        description: Item availability and settings per shop
+        
+      - name: items
+        description: Product/item master data
+        
+      - name: manufacturers
+        description: Product manufacturers
+        
+      - name: order_lines
+        description: Individual line items on purchase orders
+        
+      - name: orders
+        description: Purchase orders to vendors
+        
+      - name: sale_lines
+        description: Individual line items on sales transactions
+        
+      - name: sales
+        description: Sales transactions
+        
+      - name: shops
+        description: Store/shop locations
+        
+      - name: transfer_items
+        description: Items included in inventory transfers
+        
+      - name: transfers
+        description: Inventory transfers between locations
+        
+      - name: vendors
+        description: Vendor/supplier master data
