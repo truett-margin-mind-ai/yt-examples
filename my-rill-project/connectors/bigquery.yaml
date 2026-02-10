@@ -1,0 +1,9 @@
+
+# Connector YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/connectors
+  
+type: connector
+
+driver: bigquery
+project_id: "inventory-analytics-475119"
+google_application_credentials: "{{ .env.connector.bigquery.google_application_credentials }}"

@@ -1,0 +1,37 @@
+compiler: rillv1
+
+display_name: Lightspeed Sales Analytics
+
+# The project's default OLAP connector.
+# Learn more: https://docs.rilldata.com/reference/olap-engines
+olap_connector: duckdb
+
+features:
+  chat_charts: true
+  dashboardChat: true
+
+ai_instructions: |
+  # Project Context
+  This project tracks retail point-of-sale metrics for a supplement and nutrition store chain
+  using Lightspeed POS data. Stores are identified by names like "SX Montwood", "SX MLK", "SX Lee Trevino".
+
+  # Metrics View Routing
+  - For questions about top sellers, product performance, revenue, or units sold → use `top_products_metrics`
+
+  # Business Definitions
+  - "Revenue" refers to the line total (calcTotal) from completed, non-voided sales
+  - "Units sold" is the unitQuantity from each sale line item
+  - "Avg Unit Price" is total revenue divided by total units sold
+  - "Discount" is the discount amount applied at the line item level
+  - All sales data comes from the Lightspeed POS system via BigQuery
+
+  # Known Data Notes
+  - Only completed and non-voided sales are included
+  - Items with no description (e.g. itemID = 0) are excluded
+  - All raw Lightspeed data is stored as STRING and cast to proper types in the source model
+
+# These are example mock users to test your security policies.
+# Learn more: https://docs.rilldata.com/build/rill-project-file#test-access-policies-in-rill-developer
+mock_users:
+- email: john@yourcompany.com
+- email: jane@partnercompany.com

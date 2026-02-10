@@ -1,0 +1,28 @@
+# Source YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/models
+
+type: model
+materialize: true
+
+connector: bigquery
+
+sql: |
+  SELECT
+    sl.saleLineID,
+    TIMESTAMP(sl.timeStamp) AS sale_timestamp,
+    i.description AS product_name,
+    c.name AS category_name,
+    m.name AS manufacturer_name,
+    sh.name AS shop_name,
+    CAST(sl.unitQuantity AS FLOAT64) AS quantity,
+    CAST(sl.unitPrice AS FLOAT64) AS unit_price,
+    CAST(sl.calcTotal AS FLOAT64) AS line_total,
+    CAST(sl.discountAmount AS FLOAT64) AS discount_amount
+  FROM lightspeed_raw.sale_lines sl
+  JOIN lightspeed_raw.sales s ON sl.saleID = s.saleID
+  LEFT JOIN lightspeed_raw.items i ON sl.itemID = i.itemID
+  LEFT JOIN lightspeed_raw.shops sh ON sl.shopID = sh.shopID
+  LEFT JOIN lightspeed_raw.categories c ON i.categoryID = c.categoryID
+  LEFT JOIN lightspeed_raw.manufacturers m ON i.manufacturerID = m.manufacturerID
+  WHERE s.completed = 'true' AND s.voided = 'false'
+    AND i.description IS NOT NULL

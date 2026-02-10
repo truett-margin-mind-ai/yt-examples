@@ -1,0 +1,23 @@
+# Explore YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/explores
+
+type: explore
+
+display_name: "Top Selling Products"
+metrics_view: top_products_metrics
+
+dimensions: '*'
+measures: '*'
+defaults:
+  measures:
+    - total_revenue
+    - total_units_sold
+    - number_of_transactions
+    - avg_unit_price
+    - total_discount
+  dimensions:
+    - product_name
+    - category_name
+    - manufacturer_name
+    - shop_name
+  time_range: P3M

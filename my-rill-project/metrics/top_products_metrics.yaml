@@ -1,0 +1,66 @@
+# Metrics view YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/dashboards
+
+version: 1
+type: metrics_view
+
+display_name: Top Products Metrics
+model: top_products_model
+timeseries: sale_timestamp
+smallest_time_grain: "day"
+
+security:
+  access: true
+
+dimensions:
+  - name: product_name
+    display_name: Product Name
+    expression: product_name
+    description: "The product description from the Lightspeed catalog"
+  - name: category_name
+    display_name: Category
+    expression: category_name
+    description: "Product category"
+  - name: manufacturer_name
+    display_name: Manufacturer
+    expression: manufacturer_name
+    description: "Product manufacturer or brand"
+  - name: shop_name
+    display_name: Shop
+    expression: shop_name
+    description: "Store location where the sale occurred"
+
+measures:
+  - name: total_revenue
+    display_name: "Total Revenue"
+    expression: "sum(line_total)"
+    description: "Total revenue from completed sales"
+    format_preset: currency
+  - name: total_units_sold
+    display_name: "Total Units Sold"
+    expression: "sum(quantity)"
+    description: "Total number of units sold"
+    format_preset: humanize
+  - name: number_of_transactions
+    display_name: "Number of Transactions"
+    expression: "count(*)"
+    description: "Total number of sale line items"
+    format_preset: humanize
+  - name: avg_unit_price
+    display_name: "Avg Unit Price"
+    expression: "sum(line_total) / nullif(sum(quantity), 0)"
+    description: "Average revenue per unit sold"
+    format_preset: currency
+  - name: total_discount
+    display_name: "Total Discount"
+    expression: "sum(discount_amount)"
+    description: "Total discount amount given"
+    format_preset: currency
+
+ai_instructions: |
+  This metrics view shows product-level sales performance across all store locations.
+  - To find top sellers, sort by total_revenue or total_units_sold descending.
+  - Use the "Shop" dimension to compare performance across store locations.
+  - Use the "Manufacturer" dimension to analyze which brands sell best.
+  - Use the "Category" dimension to see which product categories drive the most revenue.
+  - The time series is based on the sale timestamp, so you can analyze trends over days, weeks, or months.
