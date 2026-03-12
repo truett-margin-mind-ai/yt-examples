@@ -1,0 +1,108 @@
+BetterUp Partner Context:
+TechCorp is a 5,000-person technology company that purchased 500 BetterUp coaching licenses in January 2025.
+They're now 6 months into their partnership, and it's time for their mid-year Business Value Review (BVR).
+You have access to data from multiple sources that don't always align perfectly:
+●
+●
+●
+●
+Salesforce shows they purchased 500 licenses
+The product platform (Looker) shows utilization and engagement metrics
+Survey data from their HR team about program satisfaction
+Support tickets logged by their program administrator
+Your offshore analyst has pulled raw data exports, but the TechCorp HR Director has flagged some concerns:
+1. 2. "Our internal count shows 340 active users, but your dashboard says 298. Which is right?"
+"We're seeing support tickets about coaches not responding quickly enough. Is this a real issue or just a few
+vocal users?"
+3. "Leadership wants to know if this investment is working. What story does the data tell?"
+Lay out the challenge:
+You need to prepare for the BVR meeting with TechCorp's HR Director and CFO in 3 days. Create two deliverables.
+Deliverable 1: Executive Summary Slide (1 slide)
+Create a single PowerPoint/Google Slides page that tells the story of TechCorp's program performance. This will be
+presented to their CFO who has limited time and needs to understand:
+●
+●
+●
+Is the program being used?
+Are employees finding value?
+Should we renew?
+Your slide should synthesize data into a clear, compelling narrative suitable for a non-technical executive audience.
+Deliverable 2: Data Reconciliation & Process Memo (1-2 pages)
+Write a brief memo (max 2 pages) that addresses:
+1. 2. 3. Data Discrepancy Analysis: How would you investigate the 340 vs 298 active user discrepancy? Walk through
+your troubleshooting process and what questions you'd ask of your offshore analyst.
+Support Ticket Assessment: Outline your approach to determining if coach response time is a systemic issue.
+What data would you need? What thresholds would indicate a real problem vs. normal variation?
+Scalability Framework: You're getting similar requests from 20+ other partners. Describe how you would:
+Triage which analyses your offshore team can handle vs. which need your direct involvement
+Create a template or framework to make future BVRs more efficient
+Identify what could be automated (with or without AI)
+○
+○
+○
+Available Data:
+Use the mock data below to complete your assignment:
+1
+Platform Utilization Data (from Looker):
+●
+●
+●
+●
+●
+Total licenses: 500
+Users who completed profile setup: 387
+Users with at least 1 coaching session: 298
+Average sessions per active user: 4.2
+Month-over-month growth: +12% new users starting coaching
+Survey Results (n=156 responses, 52% response rate among active users):
+●
+●
+●
+●
+●
+Overall satisfaction: 4.3/5.0
+"My coach helps me achieve my goals": 4.5/5.0
+"I can easily schedule sessions": 4.1/5.0
+"My coach responds to messages promptly": 3.8/5.0
+Net Promoter Score (NPS): +45
+Support Ticket Data (last 90 days):
+●
+●
+●
+●
+Total tickets: 23
+Categories:
+○
+Coach response time concerns: 8 tickets (5 from same user)
+○
+Scheduling/technical issues: 10 tickets
+○
+General questions: 5 tickets
+Average resolution time: 1.8 days
+Tickets escalated: 2
+TechCorp's Internal Count:
+●
+●
+HR reports 340 employees have "engaged with the program"
+Their definition: "Anyone who's logged in or attended an orientation session"
+Delivery Format:
+1. One slide (PPT or Google Slides format)
+2. One memo (Word, Google Doc, or PDF)
+Expected time spent:
+2-3 hours maximum. We want to see your thinking and approach, not perfection. If you need to make assumptions,
+clearly state them.
+What We're Evaluating:
+●
+●
+●
+●
+●
+●
+Systems thinking: Can you identify why data sources might conflict and how to reconcile them?
+Executive communication: Can you translate complex data into clear insights for non-technical audiences?
+Process design: Can you think beyond this one request to build scalable solutions?
+Judgment: Can you distinguish signal from noise and prioritize what matters?
+Quality orientation: Do you catch details that others might miss?
+Practical problem-solving: Can you work with imperfect data to deliver value?
+We hope you enjoy the exercise and look forward to talking to you about it as it will be a great example of how we can
+work together! Please reach out to ashley.molnar@betterup.co if you have any questions.

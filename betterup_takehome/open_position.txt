@@ -1,0 +1,125 @@
+About the job
+Let’s face it, a company whose mission is human transformation better have some fresh thinking about the employer/employee relationship. 
+
+We do. We can’t cram it all in here, but you’ll start noticing it from the first interview.
+
+Even our candidate experience is different. And when you get an offer from us (and accept it), you get way more than a paycheck. You get a personal BetterUp Coach, a development plan, a trained and coached manager, the most amazing team you’ve ever met (yes, each with their own personal BetterUp Coach), and most importantly, work that matters.
+
+This makes for a remarkably focused and fulfilling work experience. Frankly, it’s not for everyone. But for people with fire in their belly, it’s a game-changing, career-defining, soul-lifting move.
+
+Join us and we promise you the most intense and fulfilling years of your career, doing life-changing work in a fun, inventive, soulful culture. 1
+
+If that sounds exciting—and the job description below feels like a fit—we really should start talking.
+
+We are a hybrid company with a focus on in-person collaboration when necessary. Employees are expected to be available to work from one of our office hubs at least two days per week, or eight days per month. Our US hub locations include: Austin, TX; New York City, NY; San Francisco, CA; and the Arlington, VA metro area. Please ensure you can realistically commit to this structure before applying. This position is open to a limited amount of exceptions for Remote work - these will be evaluated based on business need and not guaranteed.
+
+About The Role
+
+We're seeking a Senior Reporting Analyst to own partner-facing analytics and reporting while building the processes for our data analytics function. You'll deliver actionable insights on license utilization, engagement, satisfaction, and performance metrics through both proactive reporting and a structured intake process.
+
+This role requires strong systems thinking to understand how data flows across our ecosystem and how to synthesize information from multiple sources into cohesive narratives. You'll produce high-quality reports and dashboards while establishing frameworks for scalable analytics delivery, including leadership of offshore/BPO analyst resources. You should be comfortable leveraging AI and agentic workflows to accelerate analysis, identify patterns, and automate routine reporting.
+
+What You’ll Do
+
+Analytics Intake & Request Management
+
+Serve as primary point of contact for analytics requests; triage, prioritize, and manage request queue
+Document patterns to identify automation opportunities and leverage AI tools to accelerate scoping
+
+Partner Analytics & Reporting
+
+Design and deliver comprehensive reports on license utilization, engagement, satisfaction, and behavioral patterns
+Analyze manager assessments (360-degree feedback, leadership development metrics) and coach feedback themes
+Monitor support tickets and create actionable reports identifying systemic issues
+Prepare templated Business Value Review (BVR) decks and execute custom ad-hoc analyses
+Use AI-powered analytics to automatically surface anomalies and trends
+
+Systems Thinking & Data Integration
+
+Map data flows across analytics ecosystem (Looker, Vitally, Salesforce, support systems, survey platforms)
+Understand metric relationships and synthesize disparate data sources into unified narratives
+Translate complex, multi-system data relationships into clear visualizations
+Identify opportunities for single sources of truth and eliminate conflicting data definitions
+
+AI & Agentic Analytics Integration
+
+Leverage AI tools to accelerate workflows from exploration to insight generation
+Design agentic workflows where AI autonomously generates reports and surfaces insights
+Establish validation processes for AI-generated analyses and partner with AI Engineer on enhancements
+Train offshore analysts on effective AI tool usage and monitor outputs for quality
+
+Team Structure & Offshore Analytics Enablement
+
+Build frameworks for prioritizing requests and routing to appropriate resources (senior analyst, offshore team, AI-powered self-service, automated reporting)
+Develop SOPs, templates, quality standards, and enablement programs for offshore/BPO analysts
+Mentor offshore team and teach them to validate AI analyses and escalate appropriately
+
+Cross-Functional Collaboration
+
+Partner with Data & Insights team on new models, dashboards, self-service tools, and AI-powered solutions
+Contribute to data governance initiatives and optimize analytics processes with Operations Program Manager
+
+If you have some or all of the following, please apply:
+
+Required
+
+7+ years in data analytics/business intelligence with progressive responsibility
+Expert-level data visualization skills (Looker, Tableau, or Power BI required)
+Strong Excel/Google Sheets proficiency (advanced functions, pivot tables, data modeling)
+Demonstrated systems thinking: understanding data flows, metric interconnections, and multi-source synthesis
+Experience with statistical analysis and comfortable working with AI tools as collaborative partners
+Proven ability translating complex data into clear insights for non-technical audiences
+Experience creating client-facing reports with strong attention to detail
+Strong project management skills managing multiple priorities under deadlines
+Excellent communication and stakeholder management skills
+Experience in request-driven environments and understanding data architecture/lineage
+
+Preferred
+
+Background in SaaS, HR tech, learning & development, or coaching/consulting
+Experience managing offshore/distributed analytics teams
+Knowledge of customer success metrics, Salesforce, and platforms like Vitally or Gainsight
+Understanding of 360-degree feedback and talent development metrics
+Experience with data governance frameworks, AI-powered analytics tools, and prompt engineering
+Understanding of data integration patterns and ETL concepts
+
+Technical Skills
+
+Data Visualization: Looker (ideal), Tableau, Power BI, or similar
+Analytics: Excel/Google Sheets (advanced), statistical analysis tools
+AI/Automation: AI analytics tools, prompt engineering, agentic workflow design
+Systems: Salesforce, Vitally, understanding of data models and integration patterns
+
+AI at BetterUp
+
+Our team thrives at the intersection of human expertise and AI capability. As an AI-forward company, adaptation and continuous learning are part of our daily work. We're looking for teammates who are excited to evolve alongside technology – people who experiment boldly, share their discoveries openly, and help define best practices for AI-augmented work. These professionals thoughtfully integrate AI into their work to deliver exceptional results while maintaining the human judgment and creativity that drives real innovation. During our interview process, you’ll have opportunities to showcase how you harness AI to learn, iterate, and amplify your impact.
+
+Benefits
+
+At BetterUp, we are committed to living out our mission every day and that starts with providing benefits that allow our employees to care for themselves, support their families, and give back to their community.
+
+Access to BetterUp coaching; one for you and one for a friend or family member 
+A competitive compensation plan with opportunity for advancement
+Medical, dental, and vision insurance
+Flexible paid time off
+Per year:
+All federal/statutory holidays observed
+4 BetterUp Inner Workdays (https://www.betterup.co/inner-work)
+5 Volunteer Days to give back
+Learning and Development stipend
+Company wide Summer & Winter breaks
+Year-round charitable contribution of your choice on behalf of BetterUp
+401(k) self contribution
+We are dedicated to building diverse teams that fuel an authentic workplace and sense of belonging for each and every employee. We know applying for a job can be intimidating, please don’t hesitate to reach out — we encourage everyone interested in joining us to apply.
+
+BetterUp Inc. provides equal employment opportunities (EEO) to all employees and applicants for employment without regard to race, color, religion, sex, national origin, disability, genetics, gender, sexual orientation, age, marital status, veteran status. In addition to federal law requirements, BetterUp Inc. complies with applicable state and local laws governing nondiscrimination in employment in every location in which the company has facilities. This policy applies to all terms and conditions of employment, including recruiting, hiring, placement, promotion, termination, layoff, recall, transfer, leaves of absence, compensation, and training.
+
+At BetterUp, we compensate our employees fairly for their work. Base salary is determined by job-related experience, education/training, residence location, as well as market indicators. The range below is representative of base salary only and does not include equity, sales bonus plans (when applicable) and benefits. This range may be modified in the future.
+
+The base salary range for this role is as follows:
+
+$152,000 - $209,000: San Francisco Bay Area, New York City, and Seattle
+
+$136,800-188,100: All other locations
+
+We value your privacy. Your personal data will be processed in accordance with our Privacy Policy. If you have any questions about the privacy of your personal data or your rights with regards to your personal data, please reach out to support@betterup.co

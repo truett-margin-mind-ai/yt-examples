@@ -1,0 +1,49 @@
+Kush  [12:46 PM]
+So for the balloons it'll be looser, conversational style it seems. different from technical rounds.
+
+So the questions should feel open, ambiguous
+
+Executive Judgment
+“What do you think makes reporting valuable versus just informative?”
+Why this matters:
+They’re testing whether he understands business impact beyond dashboards.
+
+Ambiguity Handling
+“You join and realize different teams define engagement differently, but everyone seems comfortable with it. Do you fix it immediately or observe first?”
+Tests:
+Judgment + change management instincts.
+
+AI Philosophy
+“BetterUp is AI-forward. Where do you think AI should not be used in analytics?”
+Tests:
+Maturity + governance thinking.
+
+Ownership Mentality
+“Tell me about a time you were wrong about an analysis.”
+Tests:
+Ego + accountability.
+
+Executive Communication
+“How do you decide what not to show in an executive report?”
+Tests:
+Signal vs noise discipline.
+
+Tradeoff Thinking
+“If you had to choose between faster reporting or more accurate reporting, what would you optimize for?”
+Tests:
+Business judgment.
+
+Culture & Impact
+“Why BetterUp? Why this role instead of continuing in marketplace analytics?”
+Tests:
+Intentionality.
+
+Systems Thinking
+“If you could redesign the analytics function from scratch here, what would you focus on first?”
+Tests:
+Vision + architecture thinking.
+
+Conflict Handling
+“Tell me about a time a stakeholder disagreed with your recommendation.”
+Tests:
+Influence without authority.

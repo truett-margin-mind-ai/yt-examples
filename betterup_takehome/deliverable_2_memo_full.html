@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 11pt;
+    color: #333;
+    line-height: 1.5;
+    max-width: 8in;
+    margin: 0.75in auto;
+  }
+  h1 {
+    font-size: 16pt;
+    color: #1a1a1a;
+    border-bottom: 2px solid #4a69bd;
+    padding-bottom: 6px;
+    margin-bottom: 4px;
+  }
+  .subtitle {
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 13pt;
+    color: #4a69bd;
+    margin-top: 22px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 11pt;
+    color: #1a1a1a;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+  p, li {
+    font-size: 11pt;
+    margin-bottom: 6px;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 10px;
+    padding-left: 24px;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0 16px 0;
+    font-size: 10pt;
+  }
+  th {
+    background-color: #4a69bd;
+    color: white;
+    text-align: left;
+    padding: 6px 10px;
+    font-weight: bold;
+  }
+  td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:nth-child(even) {
+    background-color: #f5f6fa;
+  }
+  .callout {
+    background-color: #f0f4ff;
+    border-left: 4px solid #4a69bd;
+    padding: 10px 14px;
+    margin: 12px 0;
+    font-size: 10.5pt;
+  }
+  .callout strong {
+    color: #4a69bd;
+  }
+  strong {
+    color: #1a1a1a;
+  }
+  .memo-header {
+    margin-bottom: 20px;
+  }
+  .memo-header table {
+    border: none;
+    width: auto;
+    margin: 0;
+  }
+  .memo-header td {
+    border: none;
+    padding: 2px 8px 2px 0;
+    font-size: 10.5pt;
+    background: none;
+  }
+  .memo-header td:first-child {
+    font-weight: bold;
+    color: #666;
+    width: 60px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Data Reconciliation &amp; Process Memo</h1>
+<div class="subtitle">TechCorp Mid-Year Business Value Review — Prepared by Truett Bloxsom</div>
+
+<div class="memo-header">
+<table>
+  <tr><td>To:</td><td>TechCorp BVR Preparation Team</td></tr>
+  <tr><td>From:</td><td>Truett Bloxsom, Senior Reporting Analyst</td></tr>
+  <tr><td>Date:</td><td>July 2025</td></tr>
+  <tr><td>Re:</td><td>Data discrepancy analysis, support assessment, and scalability framework</td></tr>
+</table>
+</div>
+
+<p>This memo addresses three areas flagged ahead of TechCorp's mid-year BVR: the active-user count discrepancy between systems, the coach response-time concern raised through support tickets, and a forward-looking framework for scaling BVR analytics across our partner portfolio.</p>
+
+<!-- ============================================================ -->
+<h2>1. Data Discrepancy Analysis: 340 vs. 298 Active Users</h2>
+
+<h3>Root Cause Assessment</h3>
+<p>The discrepancy is almost certainly <strong>definitional, not a data error</strong>. The two numbers measure different things:</p>
+
+<table>
+  <tr>
+    <th>Source</th>
+    <th>Count</th>
+    <th>Definition</th>
+  </tr>
+  <tr>
+    <td>TechCorp HR (internal)</td>
+    <td>340</td>
+    <td>"Engaged" = logged in <em>or</em> attended an orientation session</td>
+  </tr>
+  <tr>
+    <td>BetterUp Platform (Looker)</td>
+    <td>298</td>
+    <td>"Active" = completed at least one coaching session</td>
+  </tr>
+</table>
+
+<p>The gap of ~42 users likely represents employees who logged in or attended orientation but have not yet booked a coaching session. This is consistent with the broader activation funnel we observe in the platform data:</p>
+
+<table>
+  <tr>
+    <th>Funnel Stage</th>
+    <th>Users</th>
+    <th>% of Licenses</th>
+  </tr>
+  <tr>
+    <td>Total licenses purchased</td>
+    <td>500</td>
+    <td>100%</td>
+  </tr>
+  <tr>
+    <td>Completed profile setup</td>
+    <td>387</td>
+    <td>77%</td>
+  </tr>
+  <tr>
+    <td>TechCorp "engaged" (login or orientation)</td>
+    <td>340</td>
+    <td>68%</td>
+  </tr>
+  <tr>
+    <td>Completed 1+ coaching session (Looker)</td>
+    <td>298</td>
+    <td>60%</td>
+  </tr>
+</table>
+
+<div class="callout">
+  <strong>Key insight:</strong> Both numbers are correct — they answer different questions. The 298 figure represents the strongest measure of program adoption, while TechCorp's 340 reflects broader awareness and intent to participate. This is actually a positive signal: there is a warm pipeline of 42 users who have already shown interest and need a nudge to book their first session.
+</div>
+
+<h3>Troubleshooting Steps &amp; Questions for the Offshore Analyst</h3>
+<p>Before presenting this conclusion to TechCorp, I would validate with the following investigation:</p>
+<ol>
+  <li><strong>Confirm the Looker definition:</strong> Does "active user" require a <em>completed</em> session, or does a booked/scheduled session count? Are canceled sessions excluded?</li>
+  <li><strong>Pull a login-only segment:</strong> Can we export a list of users who logged in or completed onboarding but have zero completed sessions? Does that cohort size reconcile the ~42 gap?</li>
+  <li><strong>Check date-range alignment:</strong> Is TechCorp's 340 count cumulative since launch (Jan 2025), or a snapshot? Is the Looker data using the same time window?</li>
+  <li><strong>Verify data refresh timing:</strong> When was TechCorp's count pulled vs. the Looker export? A lag of even a few days could create variance.</li>
+  <li><strong>Request TechCorp's user list (if possible):</strong> A 1:1 match between their list and ours would definitively isolate the gap and identify any users present in one system but not the other.</li>
+</ol>
+
+<p><strong>Recommendation for TechCorp:</strong> Establish a shared "active user" definition documented in a brief data dictionary, agreed upon by both teams. This eliminates confusion for future reviews and builds trust in the reporting.</p>
+
+<!-- ============================================================ -->
+<h2>2. Support Ticket Assessment: Coach Response Time</h2>
+
+<h3>What the Data Shows</h3>
+<p>At first glance, coach response time appears in the data twice — in support tickets and in the survey. On closer inspection, both signals point to an <strong>isolated concern, not a systemic issue</strong>:</p>
+
+<table>
+  <tr>
+    <th>Data Point</th>
+    <th>Finding</th>
+    <th>Interpretation</th>
+  </tr>
+  <tr>
+    <td>Support tickets (response time)</td>
+    <td>8 tickets, but 5 from the same user</td>
+    <td>4 unique users = 1.3% of active users</td>
+  </tr>
+  <tr>
+    <td>Total support volume</td>
+    <td>23 tickets / 90 days / 298 users</td>
+    <td>Extremely low ticket rate overall</td>
+  </tr>
+  <tr>
+    <td>Escalated tickets</td>
+    <td>2 total (not necessarily response-time related)</td>
+    <td>Minimal severity</td>
+  </tr>
+  <tr>
+    <td>Survey: "Coach responds promptly"</td>
+    <td>3.8/5.0</td>
+    <td>Lowest survey score, but still positive</td>
+  </tr>
+</table>
+
+<h3>Approach to Determine if This Is a Real Problem</h3>
+<p>To move from "likely isolated" to a confident assessment, I would gather:</p>
+<ol>
+  <li><strong>Platform response-time data:</strong> Pull actual coach message response times from the platform — median, mean, 90th percentile, and distribution. Compare against BetterUp's SLA and cross-partner benchmarks.</li>
+  <li><strong>Coach-level analysis:</strong> Do the 4 unique users filing tickets share the same coach? If yes, this is a coaching-match issue, not a platform issue. If spread across coaches, investigate further.</li>
+  <li><strong>The repeat-filer:</strong> The user who submitted 5 of 8 tickets warrants individual attention — potentially a coach reassignment or direct outreach from the program administrator to understand expectations.</li>
+  <li><strong>Survey cross-tabulation:</strong> Segment the 3.8/5.0 score by tenure (new users vs. established). New users may have different expectations that normalize over time.</li>
+</ol>
+
+<div class="callout">
+  <strong>Thresholds for escalation:</strong> I would flag coach response time as a systemic issue if any of the following are true: (a) &gt;10% of active users report the concern via tickets or survey scores, (b) the survey score drops below 3.5/5.0, (c) actual platform response times exceed SLA for &gt;15% of messages, or (d) the issue is distributed across 3+ coaches rather than concentrated on one.
+</div>
+
+<p><strong>Recommendation for TechCorp:</strong> Acknowledge the feedback transparently, share what the broader data shows (high satisfaction, low ticket volume), and outline the specific steps being taken — including individual follow-up with the high-frequency reporter and a coach-level response-time review.</p>
+
+<!-- ============================================================ -->
+<h2>3. Scalability Framework: Efficient BVR Analytics at Scale</h2>
+
+<p>With 20+ partners requiring similar analyses, the current approach of ad-hoc, analyst-driven BVR prep does not scale. Below is a three-part framework to increase efficiency while maintaining quality.</p>
+
+<h3>A. Triage Model: Offshore Team vs. Senior Analyst</h3>
+
+<table>
+  <tr>
+    <th>Handled by Offshore/BPO Analysts</th>
+    <th>Requires Senior Analyst</th>
+  </tr>
+  <tr>
+    <td>Standard data pulls (utilization, survey, tickets)</td>
+    <td>Narrative building and executive storyline</td>
+  </tr>
+  <tr>
+    <td>Template population with partner-specific data</td>
+    <td>Anomaly investigation and root-cause analysis</td>
+  </tr>
+  <tr>
+    <td>Initial data reconciliation checks (definition-based gaps)</td>
+    <td>Stakeholder-facing presentations and role-plays</td>
+  </tr>
+  <tr>
+    <td>Routine QA on dashboards and data freshness</td>
+    <td>New framework or process design</td>
+  </tr>
+  <tr>
+    <td>First-pass support ticket categorization and summary</td>
+    <td>Escalation decisions and judgment calls on ambiguous data</td>
+  </tr>
+</table>
+
+<p><strong>Escalation protocol:</strong> The offshore team completes a standard BVR data package using the template (see below). They flag any metrics that fall outside defined thresholds (e.g., utilization below 40%, NPS below +20, support tickets above a per-user rate). Flagged items are routed to the senior analyst for investigation and narrative framing.</p>
+
+<h3>B. BVR Template &amp; Playbook</h3>
+<p>A standardized BVR kit would include:</p>
+<ul>
+  <li><strong>Slide template:</strong> Pre-built executive summary slide with placeholder sections for utilization, satisfaction, and renewal recommendation — auto-populated where possible.</li>
+  <li><strong>Data checklist:</strong> A step-by-step list of data pulls required for every BVR (Looker utilization, survey results, support tickets, Salesforce contract details), with instructions for the offshore team.</li>
+  <li><strong>Discrepancy playbook:</strong> Common data mismatches and their typical root causes (definitional differences, date-range misalignment, refresh lag), so the offshore team can resolve routine issues without escalation.</li>
+  <li><strong>Threshold reference card:</strong> Pre-defined benchmarks for key metrics so that both the offshore team and the senior analyst have a shared understanding of what "good" looks like vs. what requires investigation.</li>
+</ul>
+
+<h3>C. Automation &amp; AI Opportunities</h3>
+
+<table>
+  <tr>
+    <th>Opportunity</th>
+    <th>Approach</th>
+    <th>Impact</th>
+  </tr>
+  <tr>
+    <td>Auto-populate BVR templates</td>
+    <td>Script or workflow that pulls partner data from Looker/Salesforce and fills the slide template</td>
+    <td>Eliminates 30-60 min of manual data entry per partner</td>
+  </tr>
+  <tr>
+    <td>Anomaly detection</td>
+    <td>Automated alerts when key metrics (utilization, NPS, ticket volume) deviate from historical baselines or cross-partner benchmarks</td>
+    <td>Proactive issue identification; reduces reactive firefighting</td>
+  </tr>
+  <tr>
+    <td>Data reconciliation checks</td>
+    <td>Automated comparison of partner-reported counts vs. platform counts, flagging gaps above a set tolerance</td>
+    <td>Catches discrepancies before they surface in a BVR meeting</td>
+  </tr>
+  <tr>
+    <td>Support ticket summarization</td>
+    <td>AI-generated summary of ticket themes, frequency, and unique-user counts per partner</td>
+    <td>Replaces manual ticket review; surfaces patterns faster</td>
+  </tr>
+  <tr>
+    <td>First-draft narrative generation</td>
+    <td>AI drafts an initial BVR narrative from structured data; senior analyst reviews and refines</td>
+    <td>Reduces narrative prep time by ~50%; analyst focuses on judgment and storytelling</td>
+  </tr>
+</table>
+
+<div class="callout">
+  <strong>Phased rollout:</strong> Start with template standardization and the data-pull checklist (immediate, no tooling required). Next, automate the template population and reconciliation checks. Finally, introduce AI-powered narrative drafting and anomaly detection as the process matures and validation workflows are in place.
+</div>
+
+</body>
+</html>

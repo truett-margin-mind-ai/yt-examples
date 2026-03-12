@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    color: #333;
+    line-height: 1.4;
+    max-width: 7.5in;
+    margin: 0.5in auto;
+  }
+  h1 {
+    font-size: 14pt;
+    color: #1a1a1a;
+    border-bottom: 2px solid #4a69bd;
+    padding-bottom: 4px;
+    margin-bottom: 2px;
+  }
+  .subtitle {
+    font-size: 9pt;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 11.5pt;
+    color: #4a69bd;
+    margin-top: 14px;
+    margin-bottom: 4px;
+  }
+  p, li {
+    font-size: 10pt;
+    margin-bottom: 4px;
+  }
+  ul, ol {
+    margin-top: 2px;
+    margin-bottom: 6px;
+    padding-left: 20px;
+  }
+  li { margin-bottom: 2px; }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 6px 0 10px 0;
+    font-size: 9.5pt;
+  }
+  th {
+    background-color: #4a69bd;
+    color: white;
+    text-align: left;
+    padding: 4px 8px;
+  }
+  td {
+    padding: 3px 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:nth-child(even) { background-color: #f5f6fa; }
+  .memo-header {
+    margin-bottom: 10px;
+    font-size: 9.5pt;
+    line-height: 1.3;
+  }
+  .memo-header strong { color: #666; }
+</style>
+</head>
+<body>
+
+<h1>Data Reconciliation &amp; Process Memo</h1>
+<div class="subtitle">TechCorp Mid-Year Business Value Review</div>
+
+<div class="memo-header">
+  <strong>To:</strong> TechCorp BVR Preparation Team &nbsp;|&nbsp;
+  <strong>From:</strong> Truett Bloxsom &nbsp;|&nbsp;
+  <strong>Date:</strong> July 2025
+</div>
+
+<!-- ============================================================ -->
+<h2>1. Data Discrepancy Analysis: 340 vs. 298 Active Users</h2>
+
+<p>The discrepancy is <strong>definitional, not a data error</strong>. TechCorp defines "engaged" as anyone who logged in or attended orientation (340). The BetterUp platform defines "active" as completing at least one coaching session (298). The ~42-user gap represents employees who showed intent but haven't yet booked a session — a warm activation pipeline, not missing data.</p>
+
+<table>
+  <tr><th>Funnel Stage</th><th>Users</th><th>% of Licenses</th></tr>
+  <tr><td>Licenses purchased</td><td>500</td><td>100%</td></tr>
+  <tr><td>Profile setup completed</td><td>387</td><td>77%</td></tr>
+  <tr><td>TechCorp "engaged" (login/orientation)</td><td>340</td><td>68%</td></tr>
+  <tr><td>1+ coaching session (Looker)</td><td>298</td><td>60%</td></tr>
+</table>
+
+<p><strong>Validation steps I would assign to the offshore analyst:</strong></p>
+<ol>
+  <li>Confirm Looker's definition — does "active" require a <em>completed</em> session or just a booked one?</li>
+  <li>Pull the login-only segment (logged in, zero sessions) and check if the count reconciles the gap.</li>
+  <li>Verify date-range alignment and data-refresh timing between systems.</li>
+  <li>If possible, request TechCorp's user list for a 1:1 match to isolate any edge cases.</li>
+</ol>
+
+<p><strong>Recommendation:</strong> Establish a shared "active user" definition in a brief data dictionary, agreed upon by both teams, to eliminate confusion in future reviews.</p>
+
+<!-- ============================================================ -->
+<h2>2. Support Ticket Assessment: Coach Response Time</h2>
+
+<p>The data indicates an <strong>isolated concern, not a systemic issue</strong>. Of 8 coach-response-time tickets, 5 came from a single user — meaning only 4 unique users (1.3% of active users) raised this concern. Total support volume is low: 23 tickets across 90 days for 298 users, with only 2 escalations. The survey score for "coach responds promptly" (3.8/5.0) is the lowest dimension but still positive.</p>
+
+<p><strong>Investigation approach:</strong></p>
+<ol>
+  <li>Pull actual platform response-time metrics (median, 90th percentile) and compare against SLA and cross-partner benchmarks.</li>
+  <li>Check whether the 4 unique reporters share the same coach — if yes, it's a match issue, not a platform issue.</li>
+  <li>Address the repeat filer directly: likely warrants a coach reassignment or program-admin outreach.</li>
+</ol>
+
+<p><strong>Escalation thresholds:</strong> I would flag this as systemic if: (a) >10% of active users report the issue, (b) the survey score drops below 3.5, (c) platform response times exceed SLA for >15% of messages, or (d) the issue spans 3+ coaches.</p>
+
+<!-- ============================================================ -->
+<h2>3. Scalability Framework: BVR Analytics at Scale</h2>
+
+<p>With 20+ partners needing similar analyses, the BVR should not be an analyst-driven, ad-hoc effort each time. It should be a <strong>pipeline</strong> — where automation handles assembly, people handle judgment, and the senior analyst's time is spent on the work that actually moves the needle.</p>
+
+<h3>A. The BVR Pipeline</h3>
+
+<p>Every BVR follows the same core workflow. The goal is to automate and delegate the early stages so that senior effort concentrates on narrative and recommendations:</p>
+
+<ol>
+  <li><strong>Data Assembly (Automated):</strong> Pull utilization, survey, support ticket, and Salesforce data per partner into a standardized data package. This includes reconciliation checks — e.g., flagging any gap between partner-reported and platform-reported counts above a set tolerance. No human effort required at this stage.</li>
+  <li><strong>QA &amp; Flagging (Offshore + Automated Thresholds):</strong> The offshore team reviews the assembled package against predefined benchmarks (e.g., utilization below 40%, NPS below +20, ticket volume above a per-user threshold). Anomalies are flagged and escalated. Routine packages pass through without senior involvement.</li>
+  <li><strong>Narrative &amp; Judgment (Senior Analyst):</strong> Interpret the flags, investigate root causes, build the executive storyline, and make recommendations. This is the stage that requires experience, stakeholder awareness, and the ability to distinguish signal from noise — the work that cannot be automated.</li>
+  <li><strong>Delivery (Template + Customization):</strong> A pre-built BVR slide is auto-populated with the partner's data. The senior analyst adds context, tailors the recommendation, and presents.</li>
+</ol>
+
+<h3>B. Automation-First: Compress the Pipeline</h3>
+
+<p>The highest-leverage move is automating stages 1 and 2 entirely, so the senior analyst only touches work that requires judgment. I've applied this approach before: at a prior company, I inherited a multi-stakeholder Weekly Business Review where four teams each spent ~10 hours/week manually pulling metrics into a shared deck. I consolidated their sources into a data warehouse, built transformation models, and automated report generation — taking 40 hours of weekly manual assembly down to under 1 hour.</p>
+
+<p>The same playbook applies to BVR at scale:</p>
+<ul>
+  <li><strong>Consolidated data pulls</strong> from Looker, Salesforce, survey platforms, and support systems into a single automated pipeline per partner.</li>
+  <li><strong>Auto-populated BVR templates</strong> — the executive slide and data package are generated with current metrics, eliminating manual data entry.</li>
+  <li><strong>Threshold-based flagging</strong> — anomalies surface automatically rather than requiring an analyst to manually scan every partner's data.</li>
+  <li><strong>AI-drafted narrative summaries</strong> — a first-pass storyline generated from structured data, reviewed and refined by the senior analyst. This cuts narrative prep time significantly while keeping human judgment in the loop.</li>
+</ul>
+
+<h3>C. Protecting Quality at Scale</h3>
+
+<p>As BVRs scale across 20+ partners, the risk is not just inefficiency — it's metric bloat. Every partner or internal stakeholder will want "one more thing" on the slide. From experience, the discipline that matters most is knowing what <em>not</em> to include. For every metric in a BVR, apply a simple filter: <strong>Is it actionable? Does it tie to the partner's stated goals? Is it worth the ongoing maintenance cost?</strong> Without this discipline, the BVR becomes a junk drawer of vanity metrics that dilutes the insights that actually drive renewal decisions.</p>
+
+</body>
+</html>
