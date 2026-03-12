@@ -1,0 +1,263 @@
+Tell me a bit about yourself? 
+Hi, I’m Truett. I’ve spent the last five plus years building my career around using data to help businesses grow and make smarter decisions.
+
+Currently, I’m the senior data analyst at a long-distance rideshare company called hitch, where I lead all analytics and reporting. My work helps the company increase growth, reduce software costs, and decrease risks by turning complex data into actionable insights. Before this, I worked at a subscription based SaaS startup, where I drove business growth and improved efficiency through data-driven projects.
+
+Earlier in my career, I was a Business Intelligence analyst at Google Cloud and spent two years consulting with senior stakeholders across various industries, helping them solve business challenges with data.
+
+I hold an economics degree and a master’s in business analytics from UT Austin. During my master’s, I partnered with VISA on a capstone project to predict ATM fraud, which directly helped them save money.
+
+I thrive under pressure, enjoy collaborating with teams, and consistently meet deadlines-even when managing multiple projects. I’m excited about this role because it brings together my experience in analytics, problem-solving, and SaaS. I’m confident I can help your team turn data into results and add real value as a senior data analyst.
+
+Why do you want to leave your current role? 
+Data team, mentorship, mentoring 
+I've really enjoyed my time at Hitch and am proud of the impact ive made. But I am missing key parts in growing as a data analyst. One is having an analytics manager. I currently am under the VP of engineering, which I have learned a lot from but have had to outsource my data specific mentorships and I am yearning for more. The other key is collaborating with a team of analysts. I am the only analyst at the company and that will continue for at least the next year. My goal is to become a staff data analyst or scientist at a company in 3 years, and to do that, I believe I need to be on a team of analysts/scientists, not a team of engineers. 
+
+Describe a technical problem you solved
+Demand surge forecasting model
+One of Hitch's core problems since growing over the past few years was matching supply to demand when demand got high. In the past, on our highest demand days, we would lose money because we had to pay drivers much more to service more trips than usual. So, I built a SQL based demand forecasting model that predicted demand accurately up to 7 days out. This helped us accurately price rides for these days to account for for the added cost we had to payout to drivers, which resulted in higher margins, reduced margin variance, and gave operations a heads up to prepare for high demand days. 
+
+Share an analysis you did that led to a big decision.
+round trip fill rate analysis
+
+One of the core assumptions hitch had, before I ran an analysis on it, was that growing demand in a lane (like austin-dallas) would increase economics (like net revenue) in that lane.The problem was that many of our largest lanes at the time were losing us a bunch of money. So I first got a good grasp of why the c-suite thought this assumption was correct, what data they used to support this claim. I asked them if there was a metric that would make this more clear and they said: round trip fill rate. This was a metric they had never calculated other than manually for a few lanes because of its complexity, but the c-suite believed that it would help them understand why their assumption was not holding. I was able to get with an engineer and understand what data fields I would need to calculate the metric, and then I was able to do it with SQL and build a dashboard around this metric. What I found was that a lanes round trip fill rate was much more correlated with a lanes margins than demand was. This prompted the c-suite to focus on how we could increase fill rate rather than demand. And after 3 months of focusing on this problem, and tracking fill rate constantly, we were able to get our highest demand lanes from -40% margin to 10% margins without increasing prices. 
+
+What unexpected insights have you found through analysis?
+Hightouch user
+An issue arose where our snowflake costs doubled from one day to the next, so I dug into why. I first did a timeseries analysis and found the exact date and possible time at which the cost had doubled since our snowflake costs have very little variance day-to-day. This validated a suspicion i had that a recent fivetran bug, had increased our costs. So, I made changes which I thought would decrease the costs. But the next day, the costs where the same, so i dug in further. I broke down the timeseries cost by snowflake user. This unveiled that two users where costing us 95% of the bump in costs. One user was called hightouch, which chatting with our engineer who had set up that user, used to be used for reverse ETL, so it was an easy fix by disabling that user since it was not being used in any production capacity anymore. The other user called fivetran which was used for a whole bunch of services was a much harder task. I dug into the individual queries it was running and found that the highest costing queries were being run by intercom our support center app. So, i got in touch with our support lead and found that they were not using any of the data that snowflake was providing to intercom, so I got one of our engineers to shut off that service. The result was that our costs dropped 64% below our baseline before the costs doubled and saved us $2,400 a month. 
+
+How have you managed conflicting stakeholder interests?
+Urgency vs impact 
+Align their goals with companies goals 
+Google ROI, added task
+
+Align their problem with the organization's problems and do an urgency vs impact analysis. one case was where a stakeholder asked me to check a metric for accuracy, so they could confidently understand marketing spend ROI. I found an inaccuracy and it was a quick fix, but then stakeholder wanted to make a large adjustment to the logic of the ROI calculation, this was not in the tickets scope. I communicated that:
+this change would take a significant amount of time
+the impact would be marginal since we were already reducing google marketing spend and the current ROI calculation was negative and the new logic would make that even worse
+that there was another task that I was doing that could have a large impact on our margins which was our main goal at the time
+I created a ticket for this metric change so it would not get lost and said that they could prioritize it in the next cycle planning. I asked if this was ok, and the stakeholder understood. 
+
+How do you explain complex info to non-technical people?
+understand your audience
+simplify and remove jargon
+visualize the data
+focus on actionable insights
+
+Recently, I created a forecasting model that helps us predict upcoming high demand days, and calculates a price increase to riders based on how much more we need to pay drivers on these days, we call this the bonus we pay drivers. I presented a simple bar chart that showed our largest cities on the x axis, and how much bonus we actually paid drivers and what my forecasting model predicted we needed to bonus drivers. This simple chart helped the exec team see how accurate the model was and led to using this model to price rides for high demand days, resulting in lower margin variance and 3 percentage point higher margins.  
+
+
+“Tell me about yourself?”
+Senior Data Analyst, 6+ years, Google, VISA, startups (sole analyst)
+Bread and butter: data systems that make money and save time, not dusty dashboards
+Forecasting model → $63K/year revenue
+CRO project → $555K/year (dbt, BigQuery, Looker Studio, A/B testing)
+40-hour weekly reporting → 1-hour automated (SQL, Python)
+Excited about [specific thing about company/mission]
+See opportunity to make impact quickly
+
+I’m a senior data analyst with over six years of experience across both large enterprises and high-growth startups. I started at companies like Google Cloud and Visa, where I built a strong analytical foundation, and then moved into scrappy startup environments where I owned and led all data initiatives, often as the sole analyst.
+My core strength is building data systems that drive real business outcomes—whether that’s increasing revenue, reducing costs, or saving time. For example, I built a SQL-based demand forecasting model that added over $60K in net revenue for a recent startup. I also automated a 40-hour manual reporting process into a 15-minute system and led a weekly business review that directly informed roadmap decisions and helped improve margins from negative 10% to positive 20%.
+I’m passionate about using data to enable better business decisions—not just building dashboards that collect dust. I value impact and ownership, which is why I’m excited about this role. I see a strong opportunity to contribute quickly and meaningfully, and that’s exactly what I’m looking for.
+
+
+“Why are you interested in us?”
+Lead with their mission/product (what excites you about them)
+Connect your experience to their needs (why you're a fit)
+End with culture/environment (why it's mutual)
+Honestly? I've been specifically targeting mental health companies in my job search because it's a space I actually care about. I practice yoga, meditation, and I've seen firsthand how mental health impacts everything. So when I saw Meru, the mission resonated immediately.
+What really got me excited is that you're taking a holistic, mind-body approach that's actually backed by clinical outcomes - 2x better than traditional therapy which is crazy. I want to work somewhere where the product genuinely helps people, not just makes money.
+From a work perspective, this role is a perfect fit. You're looking for someone to drive a data-first culture, partner with leadership across Product, Ops, Finance, and Sales, and turn messy data into stories that actually influence decisions. That's exactly what I've been doing - I built a weekly business review with over 120 metrics that equipped C-suite with real-time business insights, led conversion optimization that added $555K/year, and I'm comfortable presenting to executives.
+Plus you're using BigQuery and dbt, which is my preferred stack. So I could hit the ground running.
+“What is your expected salary?”
+Im open, im looking for the best overall fit and package
+“Can you tell me about a project you have done?”
+CRO project
+Funnel analytics and CRO at Planoly ($14M ARR SaaS)
+Problem: conversion rates tracked in multiple Google Sheets, different sources, no one trusted the data, blocker for CRO project and company goal of increasing conversion rate
+Mapped source systems (GA4 for top of funnel, backend DB for product events)
+Built dbt/BigQuery models, created full funnel dashboard with conversion rates and trends
+Led A/B testing program: defined primary/secondary metrics, presented results to leadership
+Result: 15% conversion lift → $555K/year in revenue
+Sure. One project I'm proud of is the funnel analytics and CRO work I led at Planoly - a $14M ARR social media SaaS company.
+When I joined, the team was tracking conversion rates across multiple Google Sheets pulling from different sources with different numbers. Nobody really trusted the data, and the funnel was incomplete. This blocked them from running meaningful A/B tests or even knowing where to focus.
+So I mapped out all the source systems - GA4 for top of funnel, backend database for product events - built data models using dbt and bigquery to calculate metrics at each stage, and created a dashboard showing the full funnel with conversion rates and trends. Then I led the A/B testing program: defining primary and secondary metrics for each test, and presenting results to leadership.
+Over six months, we ran a series of tests that lifted total conversion by 15%, which added $555K per year in revenue.
+Happy to go deeper on any part of that if you'd like.
+Challenge: The biggest challenge was data accuracy. Marketing owned GA4, engineering owned the backend database, and the numbers didn't match. I had to work across both teams to understand what each system was actually tracking, clean up the data sources, and build dbt models with tests to make sure the metrics were reliable. Once people trusted the numbers, the A/B testing program actually got traction.
+
+WBR Automation 
+Hitch ($4.5M transportation SaaS), took over Weekly Business Review
+Problem: 4 people (Ops, Engineering, Marketing, CS) each spending ~10 hrs/week pulling metrics into shared PowerPoint
+Met with each person, understood their sources and calculations
+Consolidated into data warehouse, built dbt models, wrote SQL queries with segmentation
+Built Python script to auto-generate visualizations, shared PDF on Slack weekly
+Result: 40 hours → 1 hour, saved $73K/year
+
+Challenge: protecting WBR from becoming a junk drawer of metrics
+Pushed back on vanity metrics (website traffic, app downloads)
+Filter: Is it actionable? Ties to company goal? Worth the effort?
+Bigger win: found round-trip fill rate (not one-way) → margins went from -10% to +20%
+
+Sure. At Hitch - a $4.5M transportation SaaS startup - I took over and automated the Weekly Business Review.
+When I joined, the CEO was tracking maybe 3-4 metrics from some basic dashboards. Over time, it evolved into four different people - from Ops, Engineering, Marketing, and CS - each spending about 10 hours a week pulling metrics from their own sources into a shared PowerPoint. It wasn't sustainable and wasn't a good use of anyone's time.
+I met with each person to understand where their data was coming from and how they were calculating things. Then I consolidated everything into our data warehouse, built dbt models to support the metrics, and wrote SQL queries that could segment by dimensions like product or user type. I also built a Python script to generate the visualizations automatically - so each week I just printed a PDF and shared it on Slack before the meeting.
+That took us from 40 hours of manual work down to less than an 1 hour, saving roughly $73K a year.
+Happy to go deeper if you want.
+Challenge: The hardest part wasn't the technical work - it was figuring out what actually mattered and protecting the WBR from becoming a junk drawer of metrics.
+Every week, execs would ask for something new. At one point, leadership wanted website traffic and app downloads in the review. I had to push back - those are vanity metrics. They might feel good to see, but you can't act on them, and they don't tie to our core goal which was improving margins.
+I used our Linear board to prioritize requests so leadership could see what was in the queue and why. My filter was: Is it actionable? Does it tie to a company goal? Is it worth the effort to build?
+The bigger win was finding the right metric. Leadership had been tracking one-way fill rate, and it looked fine - but margins were still terrible. So I dug in and realized the problem was the return leg. Drivers have two legs, and cost is based on both - not just one. So I built round-trip fill rate instead. That was the input metric that actually drove margins. Once we started tracking it weekly, leadership pivoted company goals around improving it, and we went from -10% margins to +20% over six months.
+
+SQL Demand Model
+
+Hitch, built demand forecasting model for high-demand periods
+Problem: no visibility into demand spikes, chaos during holidays (canceled rides or paid drivers double)
+Built SQL-based model predicting when/where demand spikes were coming
+Surfaced in dashboard, set up Slack alerts for ops and support
+Worked with engineering to integrate dynamic pricing updated daily
+Result: proactive driver marketing, reduced last-minute premiums → $63K/year net revenue
+
+Challenge: started with regression/ML, accuracy was terrible (sparse, variable data)
+Simplified to two variables: days out from departure + avg bookings at that point
+More biased but reliable, easy for stakeholders to understand and trust
+
+Sure. At Hitch - a logistics startup - I built a demand forecasting model to help operations prepare for high-demand periods.
+Before this, heading into the 2024 holiday season, the company had no idea when demand would spike beyond our driver supply. When it happened, it was chaos - we either had to cancel rides, which was a terrible customer experience, or pay drivers double to get them to show up last minute, which killed our margins.
+I built a SQL-based forecasting model that predicted when and where demand spikes were coming, surfaced it in a dashboard, and set up Slack alerts for operations and support showing which cities and routes needed attention. I also worked with engineering to integrate dynamic pricing that updated daily based on the forecast.
+The model let us do proactive marketing to drivers before high-demand periods, which increased supply without the last-minute premiums. Between better pricing and lower driver payouts, it added about $63K per year in net revenue.
+Happy to dig into the details if you want.
+Challenge: The biggest challenge was building a reliable forecast. I actually started with regression and ML approaches, but the accuracy was terrible - we had sparse, highly variable historical data and the models had too much variance.
+So I simplified. I ended up using just two variables: days out from departure and the average # of bookings made that many days out. More biased, but way more reliable - and easy for stakeholders to actually understand and trust. Sometimes the simple approach wins.
+
+Stakeholder comes to ask for a dashboard, what do you do? 
+WBR story at Hitch
+
+At Hitch, leadership constantly asked for new metrics in the WBR
+Example: they wanted website traffic and app downloads added
+I pushed back - those are vanity metrics, not actionable, don't tie to company goals
+My filter: 
+Is it actionable? 
+Does it tie to a company goal? 
+Is it worth the effort?
+Used Linear board to show priorities and queue
+The bigger win: found round-trip fill rate when leadership was tracking the wrong metric (one-way fill rate)
+
+
+What do you do when a stakeholder's ask doesn't align with the company's goals?
+
+Google ROI metric change 
+
+you acknowledged their ask, explained your justification, quantified the trade-off (time vs marginal impact), and offered a path forward (created a ticket for future prioritization).
+
+
+Stakeholder asked me to check a metric for accuracy (marketing spend ROI)
+Found an inaccuracy, quick fix - done
+Then stakeholder wanted a large adjustment to the ROI calculation logic - outside the original scope
+I communicated three things:
+This change would take significant time
+Impact would be marginal - we were already reducing Google spend and ROI was negative either way
+I had higher-impact work tied to our main goal (margins)
+Created a ticket so it wouldn't get lost, said we could prioritize it next cycle
+Asked if that was okay - stakeholder understood
+
+
+Stakeholder comes to you with a data discrepancy?
+Planoly trial sign up bug 
+
+Marketing VP messaged me about free trial sign-ups looking low the previous day
+Numbers were ~3 standard deviations from the mean - clearly something was wrong
+First instinct: check my entire data pipeline from the report back to source (Stripe)
+Found the numbers matched between Stripe and dashboard - data was accurate
+Red flag: I had personally tried to sign up for a trial the day before and got a checkout error
+Connected the dots - something in the recent release broke checkout
+Immediately slacked VPs with the bug, what it was, and estimated impact
+Within an hour we had a hotfix deployed
+I pulled a list of everyone who hit the trial checkout page during the bug window
+Suggested to PMM we send a 30% discount email to recover lost conversions
+Within another hour email was sent - 15% of affected users converted
+
+
+
+How do you get alignment between metric definitions?
+WBR consolidation story
+
+Can you tell me about a time a stakeholder disagreed with your analysis or recommendation?
+
+Situation: At Hitch, we had cities like College Station with highly variable demand and limited driver supply. Our COO & I proposed using "ghost trips" - where we schedule a driver to make an empty outbound trip to pick up passengers on the return leg. Heading into a supply-constrained period, our CEO was skeptical. He was concerned about two things: margins would get crushed with an always-empty outbound leg, and drivers wouldn't show up on time without passengers holding them accountable on the first leg.
+Task: Based on his concerns, we decided not to use many ghost trips during that period. After it passed, I wanted to test whether his assumptions were actually true - so I ran an analysis comparing ghost trips to our alternative.
+Action: I compared ghost trips against the last 5 accepted regular trips during supply-constrained periods. These "last 5" trips were the ones we had to bonus heavily just to get a driver to accept, and they rarely had return passengers anyway. I looked at two metrics: margins and delays.
+Result: The data surprised everyone. Margins were essentially identical between ghost trips and those last-5 trips - because we were already paying huge bonuses and getting empty return legs anyway. But the big difference was delays: ghost trips were almost always on time, while regular last-5 trips averaged 30 minutes late. I presented this in Slack and during our Weekly Business Review. Kush came around, and we started using ghost trips more strategically in supply-constrained cities - which increased our effective supply and significantly reduced delays.
+
+How do you decide which metrics matter most when leadership is focused on the wrong ones?
+At a high level, when leadership focuses on the wrong metrics, it’s usually because they’re focused on output metrics like revenue or margins. Those are important, but they’re not always directly controllable without blunt levers like pricing.
+At Hitch, we experimented with price increases to improve margins, and while margins did improve short term, our year-over-year growth dropped significantly. I used that as a starting point to shift the conversation toward input metrics—the operational levers that actually drive those outcomes.
+I analyzed day-to-day performance and showed leadership that round-trip fill rate—the number of seats filled per round trip trip—was highly correlated with margins. More importantly, it was something teams could influence directly through product changes and smart, selective pricing updates. I presented this relationship clearly and reframed success around improving fill rate rather than raising prices across the board.
+Over the next six months, this shift in focus helped us improve margins from roughly negative 10% to positive 20% while maintaining healthy growth, which ultimately aligned leadership around the right metrics. 
+
+
+WBR 
+Challenge: vanity metric overload -> ticketing system, prioritized, input metrics focused on business goals  
+Impact: increase operational margins from -10% to +20% 
+Funnel Analysis and CRO 
+Mistake: new functionality filtering between new and repeat prospects 
+Impact: increase conv rate by 15% 
+Product Health Dashboard
+Challenge: Legacy vs new product conv rate 
+Impact: A/B test leading to increased trial conv rate 
+
+
+Need this for each story:
+Challenge
+Trade Offs 
+Measurable impact
+mistakes
+
+
+Ad-hoc ticket system 
+Demand Forecast slack channel 
+Customer Experience Dashboard Scalable System 
+Tax Projection Automation 
+
+
+
+
+Serve as primary point of contact for analytics requests; triage, prioritize, and manage request queue
+
+Designed structured intake form requiring stakeholders to articulate urgency, business question, and intended action/outcome—filtering out poorly scoped requests before they consumed resources
+Processed 10-20 requests weekly; integrated submissions with Slack alerts and backlog ticketing to maintain transparency and prevent requests from falling through cracks
+Conducted scoping calls to clarify requirements and align on deliverables, requiring mutual sign-off before work began—reduced scope creep and improved stakeholder satisfaction
+Prioritized requests with manager based on business impact vs. current sprint capacity, pulling high-urgency/high-value work into active sprints while protecting planned initiatives
+Pushed back on low-value requests (e.g., vanity metrics for dashboards) by redirecting stakeholders toward actionable KPIs tied to business outcomes
+If they probe talk about app downloads vs adding round-trip fill rate metrics 
+
+Partner Analytics & Reporting
+
+License utilization / engagement reporting: Planoly Monthly business review, WAU, MAU, WAU/MAU (stickiness), NPS, feature adoption, trial conversion rate, avg time to first response
+Templated reporting: WBR, adding a new metric -> automated weekly time series chart plus 4 ket supporting metrics: wow, you, 6 week average, 6 week average yoy
+AI-powered analytics to automatically surface anomalies and trends: demand forecasting slack channel 
+
+Systems Thinking & Data Integration
+
+Mapping data flows / ecosystem understanding: funnel analysis or documented end-to-end analytics ecosystem at Planoly
+Synthesizing disparate sources into unified narratives: funnel analysis or feature retention dashboard 
+Translating complex relationships into clear visualizations: Product Health Dashboard 
+Single source of truth / eliminating conflicting definitions: churn definition between subscription platform and custom dashboard, what's the simplest definition? Model into dashboard 
+
+AI & Agentic Analytics Integration
+
+Leveraging AI tools to accelerate workflows: cursor + data warehouse MCP, example: automating executive dashboard 
+Agentic workflows / autonomous report generation: WBR or learning platform community engagement automated email report 
+
+
+Build frameworks for prioritizing requests and routing to appropriate resources: urgency vs impact matrix. Good example is vanity metrics
+
+
+
+- Own partner-facing analytics and reporting while building the processes for our function
+- Have strong systems thinking to understand how data flows across our ecosystem and how to synthesize information from multiple sources
+ - Provide high-quality reports and dashboards while establishing frameworks for scalable analytics delivery
+ - Skilled at leveraging AI and agentic workflows to accelerate analysis, identify patterns, and automate routine reporting
+Problem is ecommerce business don't have great visibility into marketing and product analytics (product churn, LTV based on first purchase, Repeat purchase rate)
+I gathered all data sources need to provide this visibility, build a data pipeline system to ingest this data, build data models to calculate KPIs, and built out multiple dashboard pages to help uncover insights into their products 
+On top of this, i built the system with AI in a way that it would be easily repeatable for new onboarding clients 
+this resulted in 1) clients making better product decisions to increase LTV and growth 2) it allow the agency to scale quickly, since the reporting system was automated 
