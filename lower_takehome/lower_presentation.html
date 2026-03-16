@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lower | Consumer Contact Strategy Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-subtle: #f7f7f5;
+            --bg-card: #ffffff;
+            --border: #e5e5e0;
+            --border-strong: #d0d0cb;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555550;
+            --text-muted: #8a8a82;
+            --accent: #1a5c6b;
+            --accent-light: #e8f0f4;
+            --danger: #c0392b;
+            --danger-light: #fdf0ee;
+            --success: #1a7a4a;
+            --success-light: #edf7f1;
+            --warning: #b8860b;
+            --warning-light: #fdf8ec;
+            --gray-chart: #d4d4d0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+        .brand-bar {
+            background: #111;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            border-radius: 10px;
+        }
+        .brand-logo { font-size: 22px; font-weight: 800; color: white; }
+        .brand-logo span { color: #4fc3f7; }
+        .brand-tagline { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 56px 40px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+        .header-brand {
+            font-size: 13px; font-weight: 700; letter-spacing: 5px;
+            text-transform: uppercase; margin-bottom: 16px; color: var(--accent);
+        }
+        .header h1 {
+            font-size: 40px; font-weight: 800; margin-bottom: 12px;
+            letter-spacing: -0.5px; color: var(--text-primary);
+        }
+        .header p { font-size: 17px; color: var(--text-secondary); max-width: 650px; margin: 0 auto; }
+        .header-meta { margin-top: 16px; font-size: 12px; color: var(--text-muted); }
+
+        .section { margin-bottom: 48px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .section-number {
+            width: 44px; height: 44px; background: var(--accent); color: white;
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 18px; flex-shrink: 0;
+        }
+        .section-title { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+        .section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 24px; margin-bottom: 16px;
+        }
+        .card-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 14px; }
+
+        .highlight-box {
+            background: var(--bg-card); border: 2px solid var(--accent);
+            border-radius: 14px; padding: 24px; margin-bottom: 16px;
+        }
+        .highlight-box.danger { border-color: var(--danger); }
+        .highlight-box.warning { border-color: var(--warning); }
+        .highlight-stat {
+            font-size: 54px; font-weight: 800; line-height: 1; margin-bottom: 6px; color: var(--accent);
+        }
+        .highlight-stat.danger { color: var(--danger); }
+        .highlight-stat.good { color: var(--success); }
+        .highlight-label { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+        .highlight-detail { font-size: 14px; color: var(--text-secondary); margin-top: 10px; line-height: 1.6; }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .comparison-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+        .comparison-grid.four-col { grid-template-columns: 1fr 1fr 1fr 1fr; }
+        .comparison-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 22px; text-align: center;
+        }
+        .comparison-label {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px;
+            font-weight: 700; color: var(--text-muted); margin-bottom: 6px;
+        }
+        .comparison-value { font-size: 38px; font-weight: 800; color: var(--text-primary); }
+        .comparison-value.good { color: var(--success); }
+        .comparison-value.bad { color: var(--danger); }
+        .comparison-value.accent { color: var(--accent); }
+        .comparison-value.muted { color: var(--text-muted); }
+        .comparison-detail { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
+
+        .chart-container { height: 280px; position: relative; }
+        .chart-container.tall { height: 340px; }
+
+        .insight-box {
+            background: var(--accent-light); border-left: 4px solid var(--accent);
+            border-radius: 0 10px 10px 0; padding: 18px 22px; margin-top: 16px;
+        }
+        .insight-box.danger { background: var(--danger-light); border-left-color: var(--danger); }
+        .insight-box.warning { background: var(--warning-light); border-left-color: var(--warning); }
+        .insight-text { font-size: 14px; color: var(--text-primary); line-height: 1.6; }
+        .insight-text strong { font-weight: 700; }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th {
+            text-align: left; padding: 12px 14px; font-size: 11px; font-weight: 700;
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;
+            border-bottom: 2px solid var(--border);
+        }
+        .data-table td {
+            padding: 12px 14px; font-size: 14px; border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table td:first-child { color: var(--text-primary); font-weight: 600; }
+        .best-value { font-weight: 700; color: var(--success) !important; }
+        .worst-value { font-weight: 700; color: var(--danger) !important; }
+
+        .rec-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        .rec-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 14px; padding: 22px; position: relative;
+        }
+        .rec-number {
+            width: 32px; height: 32px; background: var(--accent); color: white;
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 14px; margin-bottom: 10px;
+        }
+        .rec-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
+        .rec-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+        .rec-metric { font-size: 16px; font-weight: 700; color: var(--accent); margin-top: 10px; }
+
+        .funnel-bar-container { margin: 12px 0; }
+        .funnel-row {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
+        }
+        .funnel-label {
+            width: 140px; text-align: right; font-size: 13px; font-weight: 600;
+            color: var(--text-primary); flex-shrink: 0;
+        }
+        .funnel-bar-wrap { flex: 1; height: 34px; background: #f0f0ec; border-radius: 6px; position: relative; }
+        .funnel-bar {
+            height: 100%; border-radius: 6px; display: flex; align-items: center;
+            padding-left: 10px; transition: width 0.6s ease; position: relative;
+        }
+        .funnel-value {
+            font-size: 13px; font-weight: 700; color: var(--text-primary);
+            white-space: nowrap;
+        }
+        .funnel-value.outside {
+            position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+        }
+        .funnel-value.inside { position: static; color: white; }
+        .funnel-rate {
+            font-size: 11px; color: var(--text-muted); margin-left: 6px; white-space: nowrap;
+        }
+        .funnel-rate.outside {
+            position: absolute; left: calc(100% + 8px); top: 50%; transform: translateY(-50%);
+        }
+
+        .heatmap-grid {
+            display: grid; grid-template-columns: 80px repeat(5, 1fr); gap: 3px;
+            font-size: 12px;
+        }
+        .heatmap-header { font-weight: 700; text-align: center; padding: 8px 4px; color: var(--text-muted); font-size: 11px; }
+        .heatmap-label { font-weight: 600; display: flex; align-items: center; padding: 0 6px; font-size: 12px; }
+        .heatmap-cell {
+            text-align: center; padding: 10px 4px; border-radius: 6px;
+            font-weight: 700; font-size: 13px;
+        }
+
+        .divider { height: 1px; background: var(--border); margin: 48px 0; }
+
+        @media print {
+            body { background: white; }
+            .container { max-width: 100%; padding: 20px; }
+            .section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Brand Bar -->
+        <div class="brand-bar">
+            <div class="brand-logo"><span>Lower</span> Mortgage</div>
+            <div class="brand-tagline">Data & Analytics</div>
+        </div>
+
+        <!-- SLIDE 1: Title -->
+        <div class="header">
+            <div class="header-brand">Consumer Contact Strategy</div>
+            <h1>Turning Dials into Funded Loans</h1>
+            <p>An analysis of 35,169 DTC leads and 291,000+ outbound call attempts to identify how Lower can optimize its contact strategy to increase funded loan volume.</p>
+            <div class="header-meta">Truett Bloxsom &nbsp;·&nbsp; Data: Nov 2025 – Jan 2026 &nbsp;·&nbsp; Pool A Outbound Dials</div>
+        </div>
+
+        <!-- SLIDE 2: The Funnel -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <div class="section-title">Half of all leads are lost before we ever reach them</div>
+                    <div class="section-subtitle">The DTC lead lifecycle over 3 months</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Lead Funnel: 35,169 Leads → 194 Funded Loans (0.55%)</div>
+                <div class="funnel-bar-container" style="padding-right: 120px;">
+                    <div class="funnel-row">
+                        <div class="funnel-label">Gross Leads</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:100%;background:var(--accent);"><span class="funnel-value inside">35,169</span></div></div>
+                    </div>
+                    <div class="funnel-row">
+                        <div class="funnel-label">Called</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:88.2%;background:#3a8a9b;"><span class="funnel-value inside">31,016</span><span class="funnel-rate" style="color:rgba(255,255,255,0.7);">(88%)</span></div></div>
+                    </div>
+                    <div class="funnel-row">
+                        <div class="funnel-label">Contacted</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:50.1%;background:#5ba3a8;"><span class="funnel-value inside">17,619</span><span class="funnel-rate" style="color:rgba(255,255,255,0.7);">(57%)</span></div></div>
+                    </div>
+                    <div class="funnel-row">
+                        <div class="funnel-label">Opportunities</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:24.9%;background:#7bbcb8;"><span class="funnel-value outside">8,756 <span style="font-weight:400;font-size:11px;color:var(--text-muted);">(50%)</span></span></div></div>
+                    </div>
+                    <div class="funnel-row">
+                        <div class="funnel-label">File Started</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:10.4%;background:#a0d5ca;"><span class="funnel-value outside">3,644 <span style="font-weight:400;font-size:11px;color:var(--text-muted);">(42%)</span></span></div></div>
+                    </div>
+                    <div class="funnel-row">
+                        <div class="funnel-label">Funded</div>
+                        <div class="funnel-bar-wrap"><div class="funnel-bar" style="width:1.2%;min-width:40px;background:var(--success);"><span class="funnel-value outside">194 <span style="font-weight:400;font-size:11px;color:var(--text-muted);">(5.3%)</span></span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-grid three-col">
+                <div class="comparison-card">
+                    <div class="comparison-label">Never Called</div>
+                    <div class="comparison-value muted">11.8%</div>
+                    <div class="comparison-detail">4,153 leads excluded per business rules (Nurture status)</div>
+                </div>
+                <div class="comparison-card" style="border-color: var(--danger);">
+                    <div class="comparison-label">Called but Never Contacted</div>
+                    <div class="comparison-value bad">38.2%</div>
+                    <div class="comparison-detail">13,427 leads — the largest single bucket in the funnel</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Funded Rate</div>
+                    <div class="comparison-value accent">0.55%</div>
+                    <div class="comparison-detail">Only 194 of 35,169 leads become funded loans</div>
+                </div>
+            </div>
+
+            <div class="insight-box danger">
+                <div class="insight-text"><strong>The core challenge:</strong> More than 1 in 3 leads that enter the calling queue are dialed repeatedly but never reached. This is where the biggest efficiency opportunity lies.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SLIDE 3: Cadence Compliance -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <div class="section-title">The 3-call/day cadence is met less than half the time</div>
+                    <div class="section-subtitle">Pool A target: 3 dials per day for the first 5 calendar days</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">% of Leads Hitting 3 Dials on Each Day Since Creation</div>
+                <div class="chart-container"><canvas id="cadenceChart"></canvas></div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Compliance by Lead Creation Day of Week (Heatmap)</div>
+                <div class="heatmap-grid">
+                    <div class="heatmap-header"></div>
+                    <div class="heatmap-header">Day 0</div>
+                    <div class="heatmap-header">Day 1</div>
+                    <div class="heatmap-header">Day 2</div>
+                    <div class="heatmap-header">Day 3</div>
+                    <div class="heatmap-header">Day 4</div>
+
+                    <div class="heatmap-label">Mon</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">24%</div>
+                    <div class="heatmap-cell" style="background:#4caf50;color:white;">79%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">71%</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">25%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">1%</div>
+
+                    <div class="heatmap-label">Tue</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">26%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">73%</div>
+                    <div class="heatmap-cell" style="background:#a5d6a7;">54%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">1%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">7%</div>
+
+                    <div class="heatmap-label">Wed</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">27%</div>
+                    <div class="heatmap-cell" style="background:#4caf50;color:white;">76%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">3%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">4%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">4%</div>
+
+                    <div class="heatmap-label">Thu</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">27%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">14%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">3%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">1%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">70%</div>
+
+                    <div class="heatmap-label">Fri</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">13%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">19%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">2%</div>
+                    <div class="heatmap-cell" style="background:#4caf50;color:white;">76%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">64%</div>
+
+                    <div class="heatmap-label">Sat</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">12%</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">25%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">67%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">67%</div>
+                    <div class="heatmap-cell" style="background:#f9e3a0;">41%</div>
+
+                    <div class="heatmap-label">Sun</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">17%</div>
+                    <div class="heatmap-cell" style="background:#66bb6a;color:white;">63%</div>
+                    <div class="heatmap-cell" style="background:#4caf50;color:white;">73%</div>
+                    <div class="heatmap-cell" style="background:#a5d6a7;">51%</div>
+                    <div class="heatmap-cell" style="background:#ef9a9a;">16%</div>
+                </div>
+                <div style="margin-top:10px;font-size:12px;color:var(--text-muted);">Green = ≥50% compliance &nbsp;·&nbsp; Yellow = 20-49% &nbsp;·&nbsp; Red = &lt;20%. Red cells indicate days where cadence compliance collapses — largely driven by weekend staffing gaps.</div>
+            </div>
+
+            <div class="insight-box warning">
+                <div class="insight-text"><strong>Weekend effect is the primary driver.</strong> When cadence days land on Saturday or Sunday, compliance drops to single digits. Leads created Wednesday–Friday are the most impacted — their critical Day 2–4 windows fall on weekends with minimal staffing.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SLIDE 4: Dial Efficiency -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div>
+                    <div class="section-title">81% of our dials are spent on leads we never reach</div>
+                    <div class="section-subtitle">Where 291,296 Pool A dial attempts actually go</div>
+                </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px;">
+                <div class="highlight-box">
+                    <div class="highlight-stat">96%</div>
+                    <div class="highlight-label">of funded loans come from attempts 1–5</div>
+                    <div class="highlight-detail">49 of 51 Pool A funded loans are first contacted within the first 5 attempts.</div>
+                </div>
+                <div class="highlight-box danger">
+                    <div class="highlight-stat danger">0</div>
+                    <div class="highlight-label">funded loans from attempts 11–20</div>
+                    <div class="highlight-detail">35.9% of all dials (~103K) are consumed by attempts 11–20 with zero funded loan output.</div>
+                </div>
+                <div class="highlight-box warning">
+                    <div class="highlight-stat" style="color:var(--warning);">2,972</div>
+                    <div class="highlight-label">leads got &lt;5 dials and were never contacted</div>
+                    <div class="highlight-detail">1,428 got just one attempt. These leads never got a fair shot — reclaimed dials could give them one.</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="card">
+                    <div class="card-title">Effort vs. Outcome: Where Dials Go vs. Where Funded Loans Come From</div>
+                    <div class="chart-container"><canvas id="attemptRateChart"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Cumulative % of Contacts by Attempt</div>
+                    <div class="chart-container"><canvas id="cumulContactChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="insight-box danger">
+                <div class="insight-text"><strong>Attempts 1–5 produce 96% of funded loans using 36% of dials. Attempts 11–20 produce zero funded loans while consuming the same share.</strong> Meanwhile, 2,972 leads received fewer than 5 attempts and were never contacted — they never got a fair shot. Capping Pool A at 10 reclaims ~103,000 dials per quarter to reinvest in under-dialed and incoming leads where conversion actually happens.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SLIDE 5: Speed & Timing -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div>
+                    <div class="section-title">Speed to contact is the strongest predictor of funded loans</div>
+                    <div class="section-subtitle">Same-day contact converts at nearly 2x the rate of Day 2+</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid three-col">
+                <div class="comparison-card" style="border-color:var(--success);">
+                    <div class="comparison-label">Contacted Day 0</div>
+                    <div class="comparison-value good">62%</div>
+                    <div class="comparison-detail">Opportunity rate<br><strong style="color:var(--success);">0.88% funded</strong></div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Contacted Day 1</div>
+                    <div class="comparison-value accent">48%</div>
+                    <div class="comparison-detail">Opportunity rate<br><strong>0.59% funded</strong></div>
+                </div>
+                <div class="comparison-card" style="border-color:var(--danger);">
+                    <div class="comparison-label">Contacted Day 5+</div>
+                    <div class="comparison-value bad">~35%</div>
+                    <div class="comparison-detail">Opportunity rate<br><strong style="color:var(--danger);">~0% funded</strong></div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="card">
+                    <div class="card-title">Contact Rate by Hour of Day (ET)</div>
+                    <div class="chart-container tall"><canvas id="hourChart"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Contact Rate by Day of Week</div>
+                    <div class="chart-container tall"><canvas id="dowChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text"><strong>Weekends are the biggest untapped window.</strong> Weekend contact rates are 9.9% (3x weekday) but dial volume is 10–15x lower due to only ~3 reps on shift. Weekends still generate ~55% of the daily lead volume that weekdays do — those leads deserve comparable coverage. Note: the 8–9 AM contact rate spike is a composition effect (70% early-attempt dials vs 25% midday), not a true time-of-day advantage.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SLIDE 6: Channel Performance -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div>
+                    <div class="section-title">Not all leads are created equal — and LIFO doesn't know the difference</div>
+                    <div class="section-subtitle">Channel quality varies 18x, but the system treats every lead the same</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Channel Performance: Volume, Funnel Rates & Speed to First Dial</div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Channel</th>
+                            <th>Leads</th>
+                            <th>Contact Rate</th>
+                            <th>Opp Rate</th>
+                            <th>Funded Rate</th>
+                            <th>Avg Speed</th>
+                            <th>Never Called</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Direct / Organic</td>
+                            <td>3,903</td>
+                            <td>56.1%</td>
+                            <td>77.7%</td>
+                            <td class="best-value">2.15%</td>
+                            <td>37.9 hrs</td>
+                            <td>15.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Paid Spend</td>
+                            <td>6,977</td>
+                            <td>57.1%</td>
+                            <td>77.5%</td>
+                            <td class="best-value">1.05%</td>
+                            <td>39.3 hrs</td>
+                            <td class="worst-value">26.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Digital Buy Partner</td>
+                            <td>12,555</td>
+                            <td>43.1%</td>
+                            <td>46.1%</td>
+                            <td class="worst-value">0.12%</td>
+                            <td>28.5 hrs</td>
+                            <td>0.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Movoto</td>
+                            <td>10,857</td>
+                            <td>71.9%</td>
+                            <td>36.8%</td>
+                            <td class="worst-value">0.06%</td>
+                            <td class="worst-value">51.6 hrs</td>
+                            <td>14.9%</td>
+                        </tr>
+                        <tr>
+                            <td>Retargeting</td>
+                            <td>509</td>
+                            <td>100.0%</td>
+                            <td>9.2%</td>
+                            <td class="best-value">2.75%</td>
+                            <td>—</td>
+                            <td>0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="card">
+                    <div class="card-title">Quality vs. Speed: Lowest Value Gets Fastest Response</div>
+                    <div class="chart-container"><canvas id="lifoChart"></canvas></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Funded Rate by Loan Type</div>
+                    <div class="chart-container"><canvas id="loanTypeChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="insight-box danger">
+                <div class="insight-text"><strong>The lowest-value channel gets the fastest response.</strong> Digital Buy Partner (0.12% funded) averages 28.5 hours to first dial — the fastest of any channel — because 46% of its leads are auto-dialed by the speed-to-lead campaign. Meanwhile Direct/Organic (2.15% funded, 18x more valuable) averages 37.9 hours and only 31% are auto-dialed. Paid Spend (1.05% funded) leads are never called 26.4% of the time.</div>
+            </div>
+
+            <div class="insight-box" style="margin-top: 8px;">
+                <div class="insight-text" style="font-size:13px;"><strong>Speed-to-lead campaign insight:</strong> 10,518 leads (40.6% of dialed leads) are auto-dialed instantly via a "speed-to-lead" campaign. The auto-dialer lifts contact rates across all channels (+4pp overall), and shows the strongest funded-rate lift on high-value channels — Direct/Organic auto-dialed leads fund at 1.48% vs 1.16% manual. But the campaign disproportionately serves Digital Buy Partner (46% auto-dialed) over Direct/Organic (31%). Reweighting toward quality would amplify returns.</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SLIDE 7: Recommendations -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <div>
+                    <div class="section-title">Three changes to turn more dials into funded loans</div>
+                    <div class="section-subtitle">Reallocate effort from low-yield volume to high-yield precision</div>
+                </div>
+            </div>
+
+            <div class="rec-grid">
+                <div class="rec-card">
+                    <div class="rec-number">1</div>
+                    <div class="rec-title">Cap Pool A at 10 Attempts</div>
+                    <div class="rec-text">96% of funded loans come from attempts 1–5. Attempts 11–20 produce zero funded loans but consume 36% of dials. Capping at 10 frees ~103K dials to reinvest in 2,972 under-dialed leads and incoming fresh leads.</div>
+                    <div class="rec-metric">Est. Impact: +$150–200K/quarter (~28 additional funded loans)</div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">2</div>
+                    <div class="rec-title">Implement Channel-Aware Prioritization</div>
+                    <div class="rec-text">All channels currently wait the same ~10-13 hours median despite an 18x gap in funded rate. Introducing quality-weighted priority — routing Direct/Organic and Paid Spend leads to the front of the queue — would direct speed to where it drives funded loans.</div>
+                    <div class="rec-metric">Est. Impact: +$150–200K/quarter (~28 additional funded loans)</div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">3</div>
+                    <div class="rec-title">Add Weekend Staffing</div>
+                    <div class="rec-text">Weekend contact rates are 3x weekdays (9.9% vs 3.2%) but volume is 10–15x lower due to minimal staffing. Weekends still generate ~55% of weekday lead volume. Even 2–3 additional reps on Saturday and Sunday could yield disproportionate contact and conversion gains.</div>
+                    <div class="rec-metric">Est. Impact: +$75–100K/quarter (~15 additional funded loans)</div>
+                </div>
+            </div>
+
+            <div class="insight-box" style="margin-top:20px;">
+                <div class="insight-text"><strong>The big idea:</strong> Lower's outbound cadence currently spends 81% of its dials on leads it never reaches. By capping low-yield late attempts, staffing high-yield weekend windows, and prioritizing high-quality channels — we estimate an incremental <strong>~$375–500K per quarter (~$1.5–2.0M/year)</strong> in funded loan revenue with minimal additional investment.</div>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-muted);text-align:center;">Estimates assume ~$6,000 blended revenue per funded loan (weighted by loan-type mix) and current baseline conversion rates. See appendix for detailed assumptions.</div>
+        </div>
+
+    </div>
+
+    <script>
+    Chart.register(ChartDataLabels);
+    const ACCENT = '#1a5c6b';
+    const DANGER = '#c0392b';
+    const SUCCESS = '#1a7a4a';
+    const GRAY = '#d4d4d0';
+    const WARNING = '#b8860b';
+
+    // Cadence Compliance Chart
+    new Chart(document.getElementById('cadenceChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Day 0', 'Day 1', 'Day 2', 'Day 3', 'Day 4'],
+            datasets: [{
+                label: '% Hitting 3 Dials',
+                data: [22.3, 52.2, 39.4, 38.4, 44.7],
+                backgroundColor: [GRAY, ACCENT, GRAY, GRAY, GRAY],
+                borderRadius: 6,
+                barPercentage: 0.6,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, max: 110, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0ec' } },
+                x: { grid: { display: false } }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: { anchor: 'end', align: 'end', font: { weight: 'bold', size: 13 }, formatter: v => v + '%' },
+                annotation: {}
+            }
+        },
+        plugins: [{
+            id: 'targetLine',
+            afterDraw(chart) {
+                const yScale = chart.scales.y;
+                const ctx = chart.ctx;
+                const y = yScale.getPixelForValue(100);
+                ctx.save();
+                ctx.strokeStyle = DANGER;
+                ctx.lineWidth = 2;
+                ctx.setLineDash([6, 4]);
+                ctx.beginPath();
+                ctx.moveTo(chart.chartArea.left, y);
+                ctx.lineTo(chart.chartArea.right, y);
+                ctx.stroke();
+                ctx.fillStyle = DANGER;
+                ctx.font = '11px DM Sans';
+                ctx.fillText('Target: 100%', chart.chartArea.right - 80, y - 6);
+                ctx.restore();
+            }
+        }]
+    });
+
+    // Attempt Rate Chart
+    new Chart(document.getElementById('attemptRateChart'), {
+        type: 'bar',
+        data: {
+            labels: ['1–5', '6–10', '11–20'],
+            datasets: [
+                {
+                    label: '% of Dials',
+                    data: [36.2, 27.9, 35.9],
+                    backgroundColor: GRAY,
+                    borderRadius: 3,
+                    barPercentage: 0.75,
+                    categoryPercentage: 0.6,
+                },
+                {
+                    label: '% of Funded Loans',
+                    data: [96.1, 3.9, 0],
+                    backgroundColor: ACCENT,
+                    borderRadius: 3,
+                    barPercentage: 0.75,
+                    categoryPercentage: 0.6,
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                x: { grid: { display: false }, title: { display: true, text: 'Pool A Attempt Bucket', font: { size: 11 } } },
+                y: { beginAtZero: true, max: 110, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0ec' } }
+            },
+            plugins: {
+                legend: { position: 'bottom', labels: { boxWidth: 12, padding: 16, font: { size: 11 } } },
+                datalabels: {
+                    anchor: 'end', align: 'top',
+                    font: { weight: '700', size: 11 },
+                    formatter: v => v > 0 ? v + '%' : '0%',
+                    color: function(ctx) { return ctx.datasetIndex === 1 ? ACCENT : '#777'; }
+                }
+            }
+        },
+        plugins: []
+    });
+
+    // Cumulative Contacts Chart
+    const cumulData = [46.3,59.6,67.9,73.5,78.0,81.7,84.4,86.7,88.8,90.6,92.1,93.6,94.9,95.9,97.1,98.2,99.2,99.7,99.9,100];
+    new Chart(document.getElementById('cumulContactChart'), {
+        type: 'line',
+        data: {
+            labels: Array.from({length:20}, (_,i) => i+1),
+            datasets: [{
+                data: cumulData,
+                borderColor: ACCENT,
+                backgroundColor: 'rgba(26,92,107,0.08)',
+                fill: true,
+                tension: 0.3,
+                pointRadius: Array.from({length:20}, (_,i) => [0,4,9].includes(i) ? 6 : 2),
+                pointBackgroundColor: Array.from({length:20}, (_,i) => [0,4,9].includes(i) ? ACCENT : '#aaa'),
+                borderWidth: 2.5,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, max: 105, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0ec' } },
+                x: { grid: { display: false }, title: { display: true, text: 'Pool A Attempt #', font: { size: 11 } } }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    display: function(ctx) { return [0,4,9].includes(ctx.dataIndex); },
+                    anchor: 'end', align: 'top',
+                    font: { weight: 'bold', size: 12 },
+                    formatter: v => v + '%',
+                    color: ACCENT
+                }
+            }
+        },
+        plugins: [{
+            id: 'thresholdLines',
+            afterDraw(chart) {
+                const yScale = chart.scales.y;
+                const xScale = chart.scales.x;
+                const ctx = chart.ctx;
+                ctx.save();
+                [{ val: 78, x: 4, label: '78% by attempt 5', color: SUCCESS },
+                 { val: 90.6, x: 9, label: '90.6% by attempt 10', color: WARNING }
+                ].forEach(t => {
+                    const y = yScale.getPixelForValue(t.val);
+                    const xPx = xScale.getPixelForValue(t.x);
+                    ctx.strokeStyle = t.color;
+                    ctx.lineWidth = 1;
+                    ctx.setLineDash([4, 3]);
+                    ctx.beginPath();
+                    ctx.moveTo(chart.chartArea.left, y);
+                    ctx.lineTo(xPx, y);
+                    ctx.lineTo(xPx, chart.chartArea.bottom);
+                    ctx.stroke();
+                });
+                ctx.restore();
+            }
+        }]
+    });
+
+    // Hour of Day Chart
+    new Chart(document.getElementById('hourChart'), {
+        type: 'bar',
+        data: {
+            labels: ['8AM','9AM','10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM','6PM'],
+            datasets: [
+                {
+                    label: 'Dial Volume',
+                    data: [9697,29137,39189,36745,30983,23601,32508,33080,32090,17925,6282],
+                    backgroundColor: GRAY,
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    yAxisID: 'y',
+                    order: 2
+                },
+                {
+                    label: 'Contact Rate',
+                    data: [5.92,5.03,2.77,3.05,3.51,4.17,3.15,3.16,2.90,2.81,3.77],
+                    borderColor: DANGER,
+                    backgroundColor: 'transparent',
+                    type: 'line',
+                    tension: 0.3,
+                    pointRadius: 4,
+                    pointBackgroundColor: DANGER,
+                    borderWidth: 2.5,
+                    yAxisID: 'y1',
+                    order: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f0f0ec' }, ticks: { font: { size: 10 } }, title: { display: true, text: 'Dials', font: { size: 10 } } },
+                y1: { beginAtZero: true, max: 8, position: 'right', grid: { display: false }, ticks: { callback: v => v + '%', font: { size: 10 } }, title: { display: true, text: 'Contact Rate', font: { size: 10 } } },
+                x: { grid: { display: false } }
+            },
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyle: 'rectRounded' } },
+                datalabels: { display: false }
+            }
+        },
+        plugins: []
+    });
+
+    // Day of Week Chart
+    new Chart(document.getElementById('dowChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+            datasets: [
+                {
+                    label: 'Dial Volume',
+                    data: [6597,61624,67695,62994,43979,41309,7098],
+                    backgroundColor: Array.from({length:7}, (_,i) => [0,6].includes(i) ? ACCENT : GRAY),
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                    yAxisID: 'y',
+                    order: 2
+                },
+                {
+                    label: 'Contact Rate',
+                    data: [9.46,3.37,3.20,2.86,3.12,3.19,9.88],
+                    borderColor: DANGER,
+                    backgroundColor: 'transparent',
+                    type: 'line',
+                    tension: 0.3,
+                    pointRadius: Array.from({length:7}, (_,i) => [0,6].includes(i) ? 6 : 4),
+                    pointBackgroundColor: Array.from({length:7}, (_,i) => [0,6].includes(i) ? DANGER : '#e88'),
+                    borderWidth: 2.5,
+                    yAxisID: 'y1',
+                    order: 1
+                }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true, grid: { color: '#f0f0ec' }, ticks: { font: { size: 10 } }, title: { display: true, text: 'Dials', font: { size: 10 } } },
+                y1: { beginAtZero: true, max: 12, position: 'right', grid: { display: false }, ticks: { callback: v => v + '%', font: { size: 10 } }, title: { display: true, text: 'Contact Rate', font: { size: 10 } } },
+                x: { grid: { display: false } }
+            },
+            plugins: {
+                legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyle: 'rectRounded' } },
+                datalabels: { display: false }
+            }
+        }
+    });
+
+    // Channel Quality vs Speed (corrected — excludes same-timestamp records)
+    new Chart(document.getElementById('lifoChart'), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                data: [
+                    { x: 28.5, y: 0.12, label: 'Digital Buy Partner', hrs: '28.5 hrs', stl: '46%' },
+                    { x: 51.6, y: 0.06, label: 'Movoto', hrs: '51.6 hrs', stl: '42%' },
+                    { x: 39.3, y: 1.05, label: 'Paid Spend', hrs: '39.3 hrs', stl: '28%' },
+                    { x: 37.9, y: 2.15, label: 'Direct / Organic', hrs: '37.9 hrs', stl: '31%' },
+                ],
+                backgroundColor: function(ctx) {
+                    return ctx.raw.y >= 1.0 ? ACCENT : GRAY;
+                },
+                pointRadius: 10,
+                pointHoverRadius: 13,
+            }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 10, right: 30, bottom: 4 } },
+            scales: {
+                x: { min: 20, max: 60, title: { display: true, text: 'Avg Hours to First Dial', font: { size: 11 } }, grid: { color: '#f0f0ec' },
+                     ticks: { callback: v => v + 'h', stepSize: 10 } },
+                y: { title: { display: true, text: 'Funded Rate (%)', font: { size: 11 } }, beginAtZero: true, max: 2.8, grid: { color: '#f0f0ec' } }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            const d = ctx.raw;
+                            return d.label + ': ' + d.hrs + ' avg, ' + d.y + '% funded, ' + d.stl + ' auto-dialed';
+                        }
+                    }
+                }
+            }
+        },
+        plugins: [{
+            id: 'customLabels',
+            afterDraw(chart) {
+                const ctx = chart.ctx;
+                const meta = chart.getDatasetMeta(0);
+
+                ctx.save();
+
+                const labels = [
+                    { dx: 14, dy: -8 },
+                    { dx: 14, dy: -8 },
+                    { dx: 14, dy: 0 },
+                    { dx: 14, dy: 0 },
+                ];
+                const data = chart.data.datasets[0].data;
+                meta.data.forEach((pt, i) => {
+                    const d = data[i];
+                    const lbl = labels[i];
+                    const x = pt.x + lbl.dx;
+                    const y = pt.y + lbl.dy;
+                    ctx.textAlign = 'left';
+                    ctx.font = '600 11px DM Sans';
+                    ctx.fillStyle = d.y >= 1.0 ? ACCENT : '#777';
+                    ctx.fillText(d.label, x, y - 2);
+                    ctx.font = '400 10px DM Sans';
+                    ctx.fillStyle = '#999';
+                    ctx.fillText(d.hrs + ' avg  ·  ' + d.y + '% funded', x, y + 11);
+                });
+
+                ctx.restore();
+            }
+        }]
+    });
+
+    // Loan Type Chart
+    new Chart(document.getElementById('loanTypeChart'), {
+        type: 'bar',
+        data: {
+            labels: ['HELOC', 'Refi', 'Purchase'],
+            datasets: [{
+                label: 'Funded Rate (%)',
+                data: [1.08, 0.52, 0.26],
+                backgroundColor: [ACCENT, GRAY, GRAY],
+                borderRadius: 6,
+                barPercentage: 0.5,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            scales: {
+                x: { beginAtZero: true, ticks: { callback: v => v + '%' }, grid: { color: '#f0f0ec' } },
+                y: { grid: { display: false } }
+            },
+            plugins: {
+                legend: { display: false },
+                datalabels: {
+                    anchor: 'end', align: 'end',
+                    font: { weight: 'bold', size: 13 },
+                    formatter: v => v + '%',
+                    color: function(ctx) { return ctx.dataIndex === 0 ? ACCENT : '#888'; }
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>

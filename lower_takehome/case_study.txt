@@ -1,0 +1,195 @@
+Consumer Contact Strategy Exercise
+Lower Data & Analytics Team
+Overview
+Welcome! We’re excited to get to know how you think about data, insights, and storytelling.
+This exercise is designed to help us understand how you approach real-world data, uncover 
+opportunities for improvement, and communicate your findings clearly.
+You’ll be working with anonymized data from our Direct-to-Consumer business that captures both:
+• Lead-level information (who came in, what happened, whether they converted), and
+• Contact activity data (when we reach out to those leads.)
+Your goal is to use these datasets to explore patterns, find insights, and recommend how we might 
+optimize our consumer contact strategy to increase engagement and conversion.
+What You Are Receiving
+1. This context document
+2. Two anonymized data sets: (use the personalized link attached to the email) 
+a. dim_lead – Every consumer lead in a three-month period with down funnel milestone rates
+i. Link: https://ojolabs.looker.com/looks/4062?toggle=dat,det,pik,vis
+b. fact_dial – Call activity records tied to those leads
+i. Link: https://ojolabs.looker.com/looks/4061?toggle=dat,det,fil,pik,vis
+Each data set will include a data dictionary to help you get started.
+Your Task
+Using the provided data:
+1. Explore the relationship between lead activity and contact outcomes.
+2. Answer the following prompt:
+a. Current call center operations intends to make a max of 3 calls per day for the first 5 days
+for each lead. Is that happening? (note: once a lead has been contacted this cadence 
+would stop)
+i. What % of the time does the call center reach 3 calls for each lead, for day 1, day 2 
+etc. ?
+1. What are some potential reasons that prevent this from happening?
+2. What happens to the call performance the further out in days it goes?
+a. i.e. Provide funnel rates
+3. Provide 2–3 additional key insights that explain what drives better contact or conversion 
+performance from lead to funded loan.
+4. Recommend changes that could improve our outreach approach — e.g., cadence, timing, 
+channel mix, or agent behavior. Remember the main purpose – how can we optimize our 
+consumer contact strategy to get more funded loans?
+5. Tell the story through a short presentation deck.
+Deliverable
+• A 5–7 slide deck summarizing your findings and recommendations.
+• You may use any tools you prefer (Excel, Python, R, SQL, Looker, Tableau, etc.).
+• SQL code is not required in your slides, though you’re welcome to reference it.
+• Visuals are encouraged but don’t over-engineer — focus on clarity and insight.
+Presentation Format
+• You’ll present your findings live in a 45-minute session (roughly 20-30 minutes presentation + 10–
+15 minutes discussion).
+• Senior leaders from our Lower Data & Analytics team and business partners will join.
+• Please send your slides by end of the day before your presentation.
+Tips & Callouts
+• Have fun exploring the data! Be curious — follow interesting patterns and pull on threads that 
+catch your attention.
+• Aim for actionable insights — “What should we do next?” is the mindset we’re looking for.
+• You don’t need to build dashboards. Clean visuals or charts within your deck are more than 
+enough.
+• This exercise should take 3–5 hours total of time.
+• You may find some data messiness in edge cases. If it doesn’t smell right, please reach out and 
+ask!
+Starter Kit for Suggested Themes to Explore
+• Does speed to consumer contact matter? 
+• How many times should we aim to call consumers?
+• Are there any trends in when we call consumers by day of week or hour of day?
+• Are there any trends in consumer milestone rates by speed to contact, lead source/category, or 
+day of week/hour?
+Initial Business Context
+• Our Direct-to-Consumer Line of Business (DTC) handles consumers who are looking for help 
+purchasing a home or refinancing an existing loan, or just looking to get some cash for a big 
+purchase or to pay off some debt using a HELOC.
+• DTC typically handles thousands of leads per month from multiple sources – some organic, some 
+through Paid Marketing efforts such as Google Ads run by our growth team, and some that we 
+purchase through our partner network.
+• Typically, we will engage with these leads through a mixture of organic outreach such as Calendly 
+scheduling; other times, we own the outreach with phone calls and SMS, with the goal of
+contacting the consumer, understanding their needs, and getting them into our loan pipeline for 
+our Loan Officers.
+• The purpose of this exercise is to focus in on the call activity for these leads, not SMS or Calendly
+schedules. Not every lead gets a phone call. Those with a NULL last contact attempt time have 
+not been called, typically on purpose, as they do not meet business requirements for 
+engagement.
+• Once a consumer submits a lead form on our website, our system will automatically route that 
+consumer to the next available Loan officer assistant or sales development representative or 
+licensed loan officer to take the phone call. We will make 3 calls maximum on any given day 
+within business hours to a consumer, and we will look to call more recent leads and more recent 
+lead earlier attempt numbers vs. older leads and later attempt numbers (LIFO concept). 
+• Once these consumers are connected with our contact center staff and are interested in 
+mortgage help, they will be transferred to our Licensed Loan Officers. From here, they go through 
+loan milestones such as file started, preapproval, loan locked, and ultimately funded loan.
+• Milestone rates, and how these sources of leads are getting through our contact center and 
+through our conversion funnel are extremely important to us – the more consumers we contact, 
+turn into opportunities, into preapprovals and ultimately funded loans, the more consumers we 
+can ultimately help and improve our overall process into the future.
+Questions?
+Please don’t hesitate to reach out with clarifications on context, direction, insights to:
+ Alex Kromsov. – SVP, Data & Analytics, akromsov@lower.com; 646-831-4559. Text is OK!
+Richard Park – Principal, Analyst, ripark@lower.com; 714-222-2807. Text / email preferred. 
+We expect you to have SOME questions at the start, so at least one e-mail/text should happen!
+Data Dictionary
+Leads Data Set:
+Field Definition
+Lead ID Unique identifier for the lead record. Each lead represents a consumer who 
+submitted information to inquire about a mortgage product.
+Lead Created Time Timestamp when the lead record was created in the system (EST). Represents the 
+moment the lead entered the funnel.
+Lead Created Date Date Part of the Created Timestamp for easier filtering/pivoting, etc.
+Last Contact Attempt 
+Time
+Shows last call timestamp. Use to filter out NULL to see which consumers were 
+actually called. Lead data set will give you all leads. We typically only call leads that 
+have met our business requirements for engagement.
+UTM Source Marketing source captured from the UTM parameters at the time of lead creation 
+(e.g., Google, Facebook, Zillow). Identifies the origin of traffic.
+UTM Medium Marketing medium captured from the UTM parameters (e.g., CPC, Paid Social, 
+Organic). Specifies the type of channel driving the lead.
+Lead Channel Segment Normalized grouping of lead channels based on acquisition source and medium 
+(e.g., Paid Search, Direct/Organic, Previous Consumer Retargeting, etc.).
+Lead Source The high-level source of where the lead came from – either Movoto.com website, or 
+a guided experience on Lower.com, or previous customer, etc. Imperfect, in the 
+universe of UTM and channel detail segmentation to see where the lead came from
+Borrower Requested 
+Loan Type
+Loan type requested by the lead at submission (e.g., Purchase, Refinance, HELOC).
+Current Lead Status The most recent lifecycle status of the lead within the CRM or sales funnel (e.g., 
+New, Contacted, Working, Closed).
+Gross Leads Count of unique leads based on lead_id. Used to measure total unique lead volume 
+over a given period.
+Number of Called 
+Leads
+Count of distinct leads that have at least one recorded call attempt (i.e., a contact 
+center activity exists).
+Number of Contacted 
+Leads
+Count of distinct leads where at least one call attempt resulted in a successful 
+contact (answered).
+Number of 
+Opportunities
+Count of distinct leads that progressed to an Opportunity milestone
+Number of File Started 
+Leads
+Count of distinct leads that have an associated loan file created (corresponds to the 
+“File Started” milestone).
+Number of Entered 
+Processing Leads
+Count of distinct leads whose loan files have entered the “Processing” milestone.
+Number of PreApproval Leads
+Count of distinct leads who have entered the Pre-Approval milestone.
+Number of Funded Loan 
+Leads
+Count of distinct leads have at least one loan that has been successfully funded.
+Call Activity Data Set:
+Field Definition
+Activity ID Unique identifier for the call activity record. Each row represents a single call event 
+logged in the activity dataset. Surrogate Primary Key.
+Lead ID Unique identifier of the lead associated with this call activity. Used to join to dim_lead
+for lead-level attributes.
+Lead Created Time Timestamp when the lead record was first created in the system (EST). Represents 
+the exact time the lead entered the funnel.
+Lead Created Date Date portion of the lead creation timestamp, used for grouping or filtering by calendar 
+date.
+Activity Time Timestamp when the call activity occurred (EST). Represents the precise time the call 
+attempt was made or received.
+Activity Date Date portion of the activity timestamp. Used for daily aggregations and trending.
+First Contact Time Timestamp of the first successful contact attempt with the lead (EST). Null if the lead 
+has not yet been reached.
+Contacted? Boolean flag indicating whether the call resulted in a successful contact with the lead 
+(e.g., lead answered duration of call > 29s).
+Direction Indicates whether the call was Inbound (lead called us) or Outbound (we called the 
+lead).
+Incoming Lead? Boolean flag indicating if the call originated from a newly created inbound lead (e.g., 
+webform or phone inquiry).
+Is Live Transfer? Boolean flag indicating that the contact center team member transferred this 
+consumer to a Loan Officer. The Loan Officer then typically talks to consumer and 
+starts a file and process for underwriting a loan.
+Outcome Result or disposition of the call activity (e.g., Contacted, No Answer, Voicemail, 
+Disconnected). Reflects how the call ended.
+Team Member ID Unique identifier for the team member (agent or loan officer) who handled the call.
+Team Member Name Full name of the team member associated with the call activity.
+Team Member Role The functional role or position of the team member (e.g., Loan Officer, ISA, Agent).
+Pool A call Attempt 
+Number
+Sequential count of call attempts made to the same lead. The first attempt = 1, 
+increasing with each additional attempt for Pool A Calls. Pool A represents dials 1- 20
+Is Latest Pool A Dial 
+Attempt
+Boolean flag to indicate if the call attempt number is the latest attempt
+Is Pool A (Active SDR)? Boolean flag to indicate if the call cadence is still in Pool A (dials 1 – 20). Null either 
+indicates call attempts have exceeded 20 or call cadence has finished for other 
+reasons. Not all calls are Pool A, excludes inbound, click to dial, inbound etc.
+Call Attempt Number Sequential count of call attempts made to the same lead. The first attempt = 1, 
+increasing with each additional attempt.
+Is Latest Dial Attempt? Boolean Flag to indicate if current dial attempt is the latest.
+Calls Count of call activities logged for the lead or team member within the selected 
+period.
+Contacts Count of call activities that resulted in successful contact (answered calls) within the 
+selected period.
+Transfers Sent Count of call activities where the team member initiated a transfer to another person 
+or department—typically to a Loan Officer to get a mortgage file started for 
+underwriting

@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Toys | Attribution & ROAS Executive Summary v2</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --bg-subtle: #f7f7f5;
+            --bg-card: #ffffff;
+            --border: #e5e5e0;
+            --border-strong: #d0d0cb;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555550;
+            --text-muted: #8a8a82;
+            --accent: #1a6b6a;
+            --accent-light: #e8f4f3;
+            --accent-dim: rgba(26, 107, 106, 0.08);
+            --jetset-gold: #f7c948;
+            --danger: #c0392b;
+            --danger-light: #fdf0ee;
+            --success: #1a7a4a;
+            --success-light: #edf7f1;
+            --warning: #b8860b;
+            --gray-chart: #c8c8c2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-subtle);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+        .jetset-bar {
+            background: #111;
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            border-radius: 10px;
+        }
+        .jetset-logo { font-size: 22px; font-weight: 800; color: white; }
+        .jetset-logo span { color: var(--jetset-gold); }
+        .jetset-tagline { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 56px 40px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+        .header-brand {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+        .header p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .header-meta {
+            margin-top: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .section { margin-bottom: 48px; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .section-number {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .section-title { font-size: 22px; font-weight: 700; color: var(--text-primary); }
+        .section-subtitle { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            border: 2px solid var(--accent);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        .highlight-stat {
+            font-size: 54px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+        .highlight-stat.danger { color: var(--danger); }
+        .highlight-stat.good { color: var(--success); }
+        .highlight-label { font-size: 17px; font-weight: 600; color: var(--text-primary); }
+        .highlight-detail { font-size: 14px; color: var(--text-secondary); margin-top: 10px; line-height: 1.6; }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .comparison-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+        .comparison-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+        }
+        .comparison-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .comparison-value {
+            font-size: 38px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .comparison-value.good { color: var(--success); }
+        .comparison-value.bad { color: var(--danger); }
+        .comparison-value.accent { color: var(--accent); }
+        .comparison-value.muted { color: var(--text-muted); }
+        .comparison-detail { font-size: 13px; color: var(--text-secondary); margin-top: 6px; line-height: 1.5; }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th {
+            text-align: left;
+            padding: 12px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--border);
+        }
+        .data-table td {
+            padding: 12px 14px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table td:first-child { color: var(--text-primary); font-weight: 600; }
+        .best-value { font-weight: 700; color: var(--success) !important; }
+        .worst-value { font-weight: 700; color: var(--danger) !important; }
+
+        .chart-container { height: 260px; position: relative; }
+
+        .insight-box {
+            background: var(--accent-light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 18px 22px;
+            margin-top: 16px;
+        }
+        .insight-text { font-size: 14px; color: var(--text-primary); line-height: 1.6; }
+        .insight-text strong { font-weight: 700; }
+
+        .callout-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 14px 14px 0;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+        }
+        .callout-card.warn { border-left-color: var(--warning); background: #fdf8ec; }
+        .callout-card.danger { border-left-color: var(--danger); background: var(--danger-light); }
+        .callout-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 4px;
+        }
+        .callout-card.warn .callout-label { color: var(--warning); }
+        .callout-card.danger .callout-label { color: var(--danger); }
+        .callout-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .rec-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .rec-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .rec-content { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+        .rec-content strong { color: var(--text-primary); }
+
+        .footer {
+            margin-top: 56px;
+            padding: 24px 28px;
+            background: #111;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-left { display: flex; align-items: center; gap: 18px; }
+        .footer-logo { font-size: 18px; font-weight: 800; color: white; }
+        .footer-logo span { color: var(--jetset-gold); }
+        .footer-divider { width: 1px; height: 20px; background: #444; }
+        .footer-text { color: #999; font-size: 12px; }
+        .footer-ref { color: #777; font-size: 11px; font-style: italic; }
+
+        @media (max-width: 768px) {
+            .comparison-grid, .comparison-grid.three-col { grid-template-columns: 1fr; }
+            .rec-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="jetset-bar">
+            <div class="jetset-logo">Jetset<span>.</span></div>
+            <div class="jetset-tagline">Executive Summary &bull; Ultimate Toys</div>
+        </div>
+
+        <header class="header">
+            <div class="header-brand">Ultimate Toys</div>
+            <h1>Attribution &amp; ROAS Analysis</h1>
+            <p>Where leads come from, which ones convert, and where ad spend is most effective</p>
+            <div class="header-meta">24 months of data (Feb 2024 &ndash; Feb 2026) &nbsp;|&nbsp; HubSpot &bull; Monday.com &bull; Google Ads &bull; Meta Ads</div>
+            <div class="header-meta" style="margin-top: 8px; color: var(--accent); font-weight: 600;">v2 &mdash; Updated with PMax post-bot-fix analysis &amp; vehicle-type campaign breakdown</div>
+        </header>
+
+        <!-- Section 1: Google Ads ROAS Trend -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <div>
+                    <div class="section-title">Ad Spend Doubled, but Deposits Didn't Follow</div>
+                    <div class="section-subtitle">Google Ads ROAS trend, 2024&ndash;2026</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid three-col">
+                <div class="comparison-card">
+                    <div class="comparison-label">2024 (annual)</div>
+                    <div class="comparison-value good">22.9x</div>
+                    <div class="comparison-detail">$304K spend &bull; 46 deposits<br>~$6.6K per deposit</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">2025 (annual)</div>
+                    <div class="comparison-value bad">9.7x</div>
+                    <div class="comparison-detail">$663K spend &bull; 51 deposits<br>~$13K per deposit &bull; <em>still maturing</em></div>
+                </div>
+                <div class="comparison-card" style="border-color: var(--accent);">
+                    <div class="comparison-label">Q1 &rsquo;24 vs Q1 &rsquo;25 <span style="font-size: 0.7em; color: var(--accent);">(cohorted, 6mo+ mature)</span></div>
+                    <div class="comparison-value bad">57x &rarr; 11x</div>
+                    <div class="comparison-detail">Spend up 4.5x ($26K &rarr; $118K)<br>Deposits down (9 &rarr; 8)</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">Spend scaled 2x faster than deposits</div>
+                <div class="chart-container">
+                    <canvas id="roasChart"></canvas>
+                </div>
+            </div>
+
+            <!-- COMMENTED OUT: Side-by-side conceptual illustration (Current State / Recommended Strategy)
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+
+                <div class="card" style="margin: 0; padding: 24px 20px 16px;">
+                    <div style="text-align: center; margin-bottom: 4px;">
+                        <div style="font-weight: 700; font-size: 1.05em; color: var(--text-primary);">Current State</div>
+                        <div style="font-size: 0.8em; color: var(--text-muted);">Single-channel dependency</div>
+                    </div>
+                    <svg viewBox="0 0 320 230" style="width: 100%; height: auto;">
+                        <rect x="40" y="20" width="125" height="160" fill="rgba(26,107,106,0.04)" rx="4"/>
+                        <text x="102" y="38" text-anchor="middle" font-size="10" font-weight="700" fill="rgba(26,107,106,0.25)" font-family="DM Sans, sans-serif">Linear growth</text>
+                        <rect x="165" y="20" width="130" height="160" fill="rgba(220,53,69,0.05)" rx="4"/>
+                        <text x="230" y="38" text-anchor="middle" font-size="10" font-weight="700" fill="rgba(220,53,69,0.3)" font-family="DM Sans, sans-serif">Saturation</text>
+                        <line x1="40" y1="180" x2="295" y2="180" stroke="#ccc" stroke-width="1.5"/>
+                        <line x1="40" y1="180" x2="40" y2="20" stroke="#ccc" stroke-width="1.5"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,113 255,112 295,112 L 295,180 Z" fill="rgba(150,150,150,0.12)"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,113 255,112 295,112" fill="none" stroke="#999" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="260" cy="112" r="7" fill="var(--danger)" opacity="0.85"/>
+                        <text x="260" y="104" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--danger)" font-family="DM Sans, sans-serif">You are here</text>
+                        <text x="78" y="156" text-anchor="middle" font-size="10.5" font-weight="600" fill="#888" font-family="DM Sans, sans-serif" transform="rotate(-42 78 156)">Google Ads</text>
+                        <text x="170" y="198" text-anchor="middle" font-size="10" fill="#888" font-family="DM Sans, sans-serif">Ad Spend &#x2192;</text>
+                        <text x="16" y="105" text-anchor="middle" font-size="10" fill="#888" font-family="DM Sans, sans-serif" transform="rotate(-90 16 105)">Returns &#x2192;</text>
+                    </svg>
+                </div>
+
+                <div class="card" style="margin: 0; padding: 24px 20px 16px;">
+                    <div style="text-align: center; margin-bottom: 4px;">
+                        <div style="font-weight: 700; font-size: 1.05em; color: var(--accent);">Recommended Strategy</div>
+                        <div style="font-size: 0.8em; color: var(--text-muted);">Multi-channel diversification</div>
+                    </div>
+                    <svg viewBox="0 0 320 230" style="width: 100%; height: auto;">
+                        <line x1="40" y1="180" x2="295" y2="180" stroke="#ccc" stroke-width="1.5"/>
+                        <line x1="40" y1="180" x2="40" y2="20" stroke="#ccc" stroke-width="1.5"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,113 255,112 295,112 L 295,180 Z" fill="rgba(150,150,150,0.15)"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,95 255,82 295,78 L 295,112 C 255,112 210,113 165,115 C 130,118 95,126 70,142 C 55,155 48,170 45,180 Z" fill="rgba(26,107,106,0.20)"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,68 255,52 295,48 L 295,78 C 255,82 210,95 165,115 C 130,118 95,126 70,142 C 55,155 48,170 45,180 Z" fill="rgba(10,102,194,0.18)"/>
+                        <path d="M 45,180 C 48,170 55,155 70,142 C 95,126 130,118 165,115 C 210,113 255,112 295,112" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M 165,115 C 210,95 255,82 295,78" fill="none" stroke="#1a6b6a" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M 165,115 C 210,68 255,52 295,48" fill="none" stroke="#0a66c2" stroke-width="2" stroke-linecap="round"/>
+                        <text x="170" y="198" text-anchor="middle" font-size="10" fill="#888" font-family="DM Sans, sans-serif">Total Paid Media Investment &#x2192;</text>
+                        <text x="16" y="105" text-anchor="middle" font-size="10" fill="#888" font-family="DM Sans, sans-serif" transform="rotate(-90 16 105)">Returns &#x2192;</text>
+                        <rect x="55" y="210" width="10" height="10" rx="2" fill="rgba(150,150,150,0.4)"/>
+                        <text x="69" y="219" font-size="9.5" font-weight="600" fill="#888" font-family="DM Sans, sans-serif">Google Ads</text>
+                        <rect x="138" y="210" width="10" height="10" rx="2" fill="rgba(26,107,106,0.45)"/>
+                        <text x="152" y="219" font-size="9.5" font-weight="600" fill="#1a6b6a" font-family="DM Sans, sans-serif">Facebook</text>
+                        <rect x="210" y="210" width="10" height="10" rx="2" fill="rgba(10,102,194,0.4)"/>
+                        <text x="224" y="219" font-size="9.5" font-weight="600" fill="#0a66c2" font-family="DM Sans, sans-serif">LinkedIn</text>
+                    </svg>
+                </div>
+            </div>
+            END COMMENTED OUT -->
+
+            <div class="highlight-box" style="border-color: var(--success); margin-top: 16px;">
+                <div class="highlight-stat good">~37x</div>
+                <div class="highlight-label">Facebook Ads ROAS &mdash; at just ~$19K total spend</div>
+                <div class="highlight-detail">5 Facebook deposits producing $705K in matched revenue. (2 additional deposits from LinkedIn post boosting are excluded.) Small sample, but dramatically more efficient per dollar than Google Ads. Most Meta campaigns were paused in 2025.</div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>Cohort analysis confirms diminishing returns on Google Ads.</strong> Q1 2024 produced 9 deposits on $26K spend (57x ROAS); Q1 2025 produced 8 deposits on $118K (11x). The inflection point was Q4 2024 when quarterly spend hit $150K. Rather than pushing more into a saturated channel, each new paid dollar generates higher returns when allocated to Facebook (37x ROAS at small scale) or LinkedIn. <strong>Meanwhile, Organic Search already delivers 93 deposits at $0 ad cost &mdash; investing in SEO amplifies this further.</strong> <em>Note: Late-2025 cohorts are still immature &mdash; 59% of H2 2025 paid search deals remain active.</em>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Lead Quality by Source -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <div>
+                    <div class="section-title">Organic Search Produces the Best Digital Leads</div>
+                    <div class="section-subtitle">Deposit rate and disqualification rate by traffic source (2024+)</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid three-col">
+                <div class="comparison-card">
+                    <div class="comparison-label">Organic Search</div>
+                    <div class="comparison-value good">21.9%</div>
+                    <div class="comparison-detail">Deposit rate<br>12.5% DQ &bull; 425 deals</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Paid Search</div>
+                    <div class="comparison-value">12.6%</div>
+                    <div class="comparison-detail">Deposit rate<br>28.2% DQ &bull; 787 deals</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Direct Traffic</div>
+                    <div class="comparison-value bad">7.4%</div>
+                    <div class="comparison-detail">Deposit rate<br><strong style="color:var(--danger);">42.7% DQ</strong> &bull; 1,001 deals</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">Organic converts at the highest rate of any digital channel with half the DQ rate of Paid Search</div>
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="sourceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>Direct Traffic sends 1,001 deals but only 74 convert.</strong> For someone to type the URL directly, they'd already need to know the brand &mdash; which usually means a prior touchpoint introduced them first. Some of this volume may be losing its source attribution through the form submission flow.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Lead Quality by Geography -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <div>
+                    <div class="section-title">Proximity to HQ Drives Conversion</div>
+                    <div class="section-subtitle">Ohio converts at 51%; High Income Cities target states at 8&ndash;16%</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-label">Ohio (HQ State)</div>
+                    <div class="comparison-value good">51.1%</div>
+                    <div class="comparison-detail">Deposit rate &bull; 333 deals<br>13.5% DQ rate</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">HIC States (CA, FL, TX, NY)</div>
+                    <div class="comparison-value bad">8&ndash;16%</div>
+                    <div class="comparison-detail">Deposit rate range<br>$118K+ in dedicated ad spend</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">Midwest states outperform; New York and Illinois convert below 9%</div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>State</th><th>Deals</th><th>Deposits</th><th>Deposit Rate</th><th>DQ Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ohio</td><td>333</td><td>170</td><td class="best-value">51.1%</td><td>13.5%</td></tr>
+                        <tr><td>Michigan</td><td>63</td><td>15</td><td class="best-value">23.8%</td><td>17.5%</td></tr>
+                        <tr><td>Indiana</td><td>47</td><td>9</td><td>19.1%</td><td>25.5%</td></tr>
+                        <tr><td>Texas</td><td>240</td><td>39</td><td>16.3%</td><td>25.8%</td></tr>
+                        <tr><td>California</td><td>319</td><td>48</td><td>15.0%</td><td>27.3%</td></tr>
+                        <tr><td>Florida</td><td>259</td><td>33</td><td>12.7%</td><td>20.5%</td></tr>
+                        <tr><td>New York</td><td>155</td><td>13</td><td class="worst-value">8.4%</td><td class="worst-value">32.9%</td></tr>
+                        <tr><td>Illinois</td><td>108</td><td>8</td><td class="worst-value">7.4%</td><td class="worst-value">33.3%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <div class="card-title">HIC cost premium is widening &mdash; from +25% in July to +61% in January</div>
+                <div class="chart-container" style="height: 240px;">
+                    <canvas id="hicChart"></canvas>
+                </div>
+            </div>
+
+            <div class="callout-card">
+                <div class="callout-label">HIC vs. Luxury Vehicle-Type (July 2025 &ndash; Feb 2026)</div>
+                <div class="callout-text">
+                    High Income Cities: <strong>$226/conversion</strong> across 8 campaigns ($131K) &nbsp;&bull;&nbsp;
+                    Luxury Vehicle-Type: <strong>$165/conversion</strong> across 6 campaigns ($373K) &nbsp;&bull;&nbsp;
+                    HIC costs <strong>37% more</strong> per conversion.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>The HIC campaign strategy is underperforming Luxury vehicle-type campaigns, and the gap is getting worse.</strong> Midwest proximity matters enormously for $150K+ purchases. Consider reducing HIC budgets and redirecting to broader Search campaigns.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Lead Quality by Form Type -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <div>
+                    <div class="section-title">Vehicle-Specific Forms Convert at 22x Generic Forms</div>
+                    <div class="section-subtitle">Form type is the strongest predictor of lead quality</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-label">Vehicle Information Form</div>
+                    <div class="comparison-value good">76.6%</div>
+                    <div class="comparison-detail">Deposit rate &bull; 0 DQs<br>95 of 124 deals converted</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Generic "Contact Us"</div>
+                    <div class="comparison-value bad">3.5%</div>
+                    <div class="comparison-detail">Deposit rate &bull; 47.6% DQ<br>40 of 1,137 deals converted</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">Generic forms generate volume but almost no sales <span style="font-weight: 400; font-size: 0.8em; color: var(--text-muted);">(pre-launch form data, 2024+)</span></div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Form</th><th>Deals</th><th>Deposits</th><th>Deposit Rate</th><th>DQ Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Contact Us (generic)</td><td>1,137</td><td>40</td><td class="worst-value">3.5%</td><td class="worst-value">47.6%</td></tr>
+                        <tr><td>Get in Touch</td><td>228</td><td>48</td><td>21.1%</td><td>0.4%</td></tr>
+                        <tr><td>Contact Sales</td><td>178</td><td>37</td><td>20.8%</td><td>24.7%</td></tr>
+                        <tr><td>Vehicle Information Form</td><td>124</td><td>95</td><td class="best-value">76.6%</td><td class="best-value">0%</td></tr>
+                        <tr><td>Trade-In Form</td><td>24</td><td>12</td><td class="best-value">50.0%</td><td>4.2%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout-card">
+                <div class="callout-label">New Website Launched Feb 19, 2026</div>
+                <div class="callout-text">
+                    The new site replaced generic forms with vehicle-specific inline forms on every listing. <strong>In 10 days: 300 vehicle-specific submissions</strong> &mdash; exceeding the 227 old-site submissions from the prior 49 days. The old "Contact Us" form is effectively retired. The table above reflects old-site form performance (mature data). New-site form deposit rates will be measurable by May.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>The new site's vehicle-specific forms mirror the structure of the form that converts at 76.6%.</strong> Early volume is very strong. If these forms replicate even half that conversion rate, lead quality will improve dramatically.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: PMax Post-Bot-Fix Analysis -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <div>
+                    <div class="section-title">PMax: Bot Traffic Confirmed, Still Underperforming Even at Low Spend</div>
+                    <div class="section-subtitle">Bot traffic peak: Aug 2024 &ndash; May 2025 &nbsp;|&nbsp; Only 1 PMax deal after the fix</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-label">Jan&ndash;Feb 2025 PMax DQ Rate</div>
+                    <div class="comparison-value bad">88&ndash;100%</div>
+                    <div class="comparison-detail">Confirms the bot traffic problem<br>39 of 39 deals DQ'd in those 2 months</div>
+                </div>
+                <div class="comparison-card" style="border-color: var(--accent);">
+                    <div class="comparison-label">Jun&ndash;Dec 2025 (Post-Fix)</div>
+                    <div class="comparison-value muted">1 deal</div>
+                    <div class="comparison-detail">PMax was essentially turned off<br>$7.9K spent &bull; 0 deposits &bull; 1 lost</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">At similar spend levels post-fix, other campaign types produced real deals &mdash; PMax did not</div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Campaign Type</th><th>H2 2025 Spend</th><th>GA "Conversions"</th><th>Real Deals</th><th>Deposits</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Conquest</td><td>$12,035</td><td>105</td><td class="best-value">8</td><td class="best-value">4</td></tr>
+                        <tr><td>PMax</td><td>$7,924</td><td class="worst-value">181</td><td class="worst-value">1</td><td class="worst-value">0</td></tr>
+                        <tr><td>Brand</td><td>$7,563</td><td>219</td><td colspan="2" style="color: var(--text-muted); font-style: italic;">Not attributable via source_data_1</td></tr>
+                        <tr><td>Demand Gen</td><td>$2,940</td><td>75</td><td>6</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout-card danger">
+                <div class="callout-label">The PMax pattern persists at any spend level</div>
+                <div class="callout-text">
+                    PMax reported <strong>181 "conversions"</strong> in H2 2025 but produced just <strong style="color: var(--danger);">1 actual deal (lost)</strong>. At comparable spend, Conquest produced 8 deals and 4 deposits. PMax's inflated conversion counts &mdash; form submissions and calls that never become real leads &mdash; continue even at $1K/month.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>The bot traffic (88&ndash;100% DQ in Jan&ndash;Feb 2025) is confirmed.</strong> PMax was correctly scaled back. With only 1 deal post-fix, we can't run a statistically valid before/after comparison &mdash; but the conversion-to-deal ratio (181:1) still looks poor. If UT wants a definitive answer, a controlled $3&ndash;5K/month test with clean UTM tracking would settle it.
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Campaign Performance by Vehicle Type -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <div>
+                    <div class="section-title">Sprinter Vans Most Efficient; RVs and Mobility Need Attention</div>
+                    <div class="section-subtitle">Campaign performance grouped by vehicle type (2025+)</div>
+                </div>
+            </div>
+
+            <div class="comparison-grid three-col">
+                <div class="comparison-card" style="border-color: var(--success);">
+                    <div class="comparison-label">Best: Sprinter Vans</div>
+                    <div class="comparison-value good">$126</div>
+                    <div class="comparison-detail">Cost/conversion &bull; $1.86 CPC<br>$121K spend &bull; 955 conversions</div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-label">Highest Volume: Mercedes / Conversion</div>
+                    <div class="comparison-value accent">$215</div>
+                    <div class="comparison-detail">Cost/conversion &bull; $2.55 CPC<br>$227K spend &bull; 1,057 conversions</div>
+                </div>
+                <div class="comparison-card" style="border-color: var(--danger);">
+                    <div class="comparison-label">Most Expensive: Mobility Vans</div>
+                    <div class="comparison-value bad">$253</div>
+                    <div class="comparison-detail">Cost/conversion &bull; $3.36 CPC<br>$38K spend &bull; 150 conversions</div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px;">
+                <div class="card-title">Google Ads efficiency varies 2x across vehicle types</div>
+                <div class="chart-container" style="height: 320px;">
+                    <canvas id="vehicleChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Mercedes / Conversion Vans lead in HubSpot deposit rate &mdash; 30.4% with zero DQs</div>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Vehicle Type</th><th>Deals</th><th>Deposits</th><th>Deposit Rate</th><th>DQ Rate</th><th>Est. Cost/Deposit</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Mercedes / Conversion Vans</td><td>56</td><td class="best-value">17</td><td class="best-value">30.4%</td><td class="best-value">0%</td><td>~$13.3K</td></tr>
+                        <tr><td>Sprinter Vans</td><td>55</td><td>8</td><td>14.5%</td><td class="best-value">0%</td><td>~$15.1K</td></tr>
+                        <tr><td>Camper Vans</td><td>61</td><td>8</td><td>13.1%</td><td>1.6%</td><td>~$13.2K</td></tr>
+                        <tr><td>Conquest</td><td>9</td><td>4</td><td>44.4%</td><td class="best-value">0%</td><td>~$6.2K</td></tr>
+                        <tr><td>Mobility Vans</td><td style="color: var(--text-muted);">0</td><td>0</td><td style="color: var(--text-muted);">&mdash;</td><td>&mdash;</td><td style="color: var(--text-muted);">No attribution</td></tr>
+                        <tr><td>RVs</td><td style="color: var(--text-muted);">1</td><td>0</td><td style="color: var(--text-muted);">&mdash;</td><td>&mdash;</td><td style="color: var(--text-muted);">No attribution</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout-card" style="border-left-color: var(--success); background: var(--success-light);">
+                <div class="callout-label" style="color: var(--success);">Conquest: Strong Performance, Structural Fixes Needed</div>
+                <div class="callout-text">
+                    Conquest campaigns target competitor brand keywords (Midwest Automotive Designs, Becker, Grech RV, Camping World). At <strong>$25K spend</strong>: 9 deals, <strong style="color: var(--success);">4 deposits (44.4%), 0% DQ</strong>. People searching for competitors are already serious buyers. In H2 2025 alone, Conquest produced 4 deposits at $12K &mdash; a better return than $8K of PMax. <strong>Note:</strong> The paid media team has identified structural issues with the Conquest campaign setup that need to be addressed before any budget reallocation.
+                </div>
+            </div>
+
+            <div class="callout-card danger">
+                <div class="callout-label">RV &amp; Mobility Vans: Likely Poor Performers</div>
+                <div class="callout-text">
+                    RVs converts Google Ads clicks to real HubSpot contacts at <strong>3&ndash;5x lower rates</strong> than other vehicle campaigns (8.9% vs 24&ndash;45%). Of the 32 RV contacts we can track, <strong style="color: var(--danger);">zero converted to deposits</strong>. Mobility has 150 GA "conversions" but zero identifiable HubSpot contacts. Combined $114K in spend with no evidence of producing sales.
+                </div>
+            </div>
+
+            <div class="callout-card warn">
+                <div class="callout-label">Camper Vans Efficiency Degrading</div>
+                <div class="callout-text">
+                    Camper Vans cost/conversion rose from <strong>$104 in April 2025</strong> to <strong>$431 in December 2025</strong> &mdash; a 4x increase. Meanwhile, Sprinter Vans improved from $340&ndash;618 in early 2025 to $41&ndash;180 in H2 2025 after budget was scaled up.
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <div class="insight-text">
+                    <strong>Mercedes / Conversion Vans is the top performer across both Google Ads volume and HubSpot close rates.</strong> Its 30.4% deposit rate with zero DQs makes it the most reliable vehicle category. Sprinter Vans offers the best Google Ads efficiency ($126/conv) with solid HubSpot conversion. RVs and Mobility show poor performance at every level &mdash; highest CPCs, lowest conversion-to-contact rates, and zero trackable deposits.
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">★</div>
+                <div>
+                    <div class="section-title">Recommended Actions</div>
+                    <div class="section-subtitle">Eight steps to improve lead quality and ad efficiency</div>
+                </div>
+            </div>
+
+            <div class="rec-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="rec-card">
+                    <div class="rec-number">1</div>
+                    <div class="rec-content">
+                        <strong>Test reducing HIC spend by 25%.</strong> Redirect to broader Search campaigns. The cost premium is widening and HIC states convert at 3&ndash;6x lower rates than Ohio.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">2</div>
+                    <div class="rec-content">
+                        <strong>Invest in SEO.</strong> Organic Search converts at 21.9% &mdash; the highest digital channel &mdash; at $0 marginal ad cost. With Google Ads showing diminishing returns, SEO is the most capital-efficient growth lever.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">3</div>
+                    <div class="rec-content">
+                        <strong>Test incremental Meta Ads budget.</strong> ~37x Facebook ROAS at $19K is a strong signal. Run a controlled test at $5&ndash;10K/month before scaling Google Ads further.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">4</div>
+                    <div class="rec-content">
+                        <strong>Review Camper Vans budget.</strong> Cost/conversion rose 4x (Apr&ndash;Dec 2025). Consider pausing or reducing budget while Sprinter Vans and Mercedes campaigns scale more efficiently.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">5</div>
+                    <div class="rec-content">
+                        <strong>Reduce Mobility Vans and RV budgets by 50%; reallocate to Mercedes / Conversion Vans.</strong> These are the two most expensive campaigns (RVs $5.35 CPC, Mobility $3.85) with the lowest conversion-to-contact rates (9% and 0% vs 25&ndash;45% for other vehicles). Even tracked RV leads show zero deposits.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">6</div>
+                    <div class="rec-content">
+                        <strong>Filter junk leads before they enter the pipeline.</strong> ~35% of DQs are unreachable contacts, ~14% confirmed bots. Add phone validation and CAPTCHA/honeypot on forms to reduce wasted rep time.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">7</div>
+                    <div class="rec-content">
+                        <strong>Investigate Direct Traffic attribution.</strong> 1,001 deals at 42.7% DQ suggests attribution loss. Verify UTMs are preserved through the new form flow.
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <div class="rec-number">8</div>
+                    <div class="rec-content">
+                        <strong>Add UTM campaign tags for all vehicle types.</strong> Enables campaign-level attribution in HubSpot. RVs and Mobility have the weakest tracking &mdash; fixing this will confirm whether the reduced budgets should be cut entirely or restored.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="footer-logo">Jetset<span>.</span></div>
+                <div class="footer-divider"></div>
+                <div class="footer-text">Ultimate Toys Attribution Analysis &bull; March 2026</div>
+            </div>
+            <div class="footer-ref">Full methodology and supporting data in the detailed attribution report</div>
+        </footer>
+    </div>
+
+    <script>
+        Chart.register(ChartDataLabels);
+
+        const accent = '#1a6b6a';
+        const gray = '#c8c8c2';
+        const grayLight = '#e5e5e0';
+        const danger = '#c0392b';
+        const success = '#1a7a4a';
+        const textMuted = '#8a8a82';
+        const textPrimary = '#1a1a1a';
+        const textSecondary = '#555550';
+
+        Chart.defaults.color = textSecondary;
+        Chart.defaults.borderColor = grayLight;
+        Chart.defaults.font.family = "'DM Sans', sans-serif";
+
+        // Section 1: Spend vs Deposits — highlight the gap
+        new Chart(document.getElementById('roasChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2024', '2025', '2026 YTD'],
+                datasets: [
+                    {
+                        label: 'Spend ($K)',
+                        data: [304, 663, 168],
+                        backgroundColor: [gray, accent, gray],
+                        borderRadius: 6,
+                        yAxisID: 'y',
+                        barPercentage: 0.7
+                    },
+                    {
+                        label: 'Deposits',
+                        data: [46, 51, 4],
+                        backgroundColor: [gray, danger, gray],
+                        borderRadius: 6,
+                        yAxisID: 'y',
+                        barPercentage: 0.7
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, font: { weight: 600, size: 12 }, padding: 20 } },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 2,
+                        font: { weight: 700, size: 12 },
+                        color: textPrimary,
+                        formatter: function(value, context) {
+                            if (context.datasetIndex === 0) return '$' + value + 'K';
+                            return value;
+                        },
+                        display: function(context) {
+                            return context.dataIndex <= 1;
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        display: false,
+                        max: 800
+                    },
+                    x: { grid: { display: false }, ticks: { font: { weight: 600 } } }
+                }
+            }
+        });
+
+
+        // Section 2: Source quality — highlight the story
+        new Chart(document.getElementById('sourceChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Offline', 'Organic Search', 'Paid Social', 'Paid Search', 'Direct Traffic'],
+                datasets: [
+                    {
+                        label: 'Deposit Rate',
+                        data: [20.4, 21.9, 15.6, 12.6, 7.4],
+                        backgroundColor: [gray, success, gray, gray, gray],
+                        borderRadius: 5,
+                        barPercentage: 0.7
+                    },
+                    {
+                        label: 'DQ Rate',
+                        data: [16.3, 12.5, 6.7, 28.2, 42.7],
+                        backgroundColor: [
+                            'rgba(180, 180, 180, 0.4)',
+                            'rgba(180, 180, 180, 0.4)',
+                            'rgba(180, 180, 180, 0.4)',
+                            'rgba(180, 180, 180, 0.4)',
+                            danger
+                        ],
+                        borderColor: [gray, gray, gray, gray, danger],
+                        borderWidth: 1.5,
+                        borderDash: [4, 2],
+                        borderRadius: 5,
+                        barPercentage: 0.7
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                layout: { padding: { right: 40 } },
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, font: { weight: 600, size: 12 }, padding: 20 } },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'right',
+                        offset: 6,
+                        font: { weight: 700, size: 11 },
+                        color: function(ctx) {
+                            if (ctx.datasetIndex === 0 && ctx.dataIndex === 1) return success;
+                            if (ctx.datasetIndex === 1 && ctx.dataIndex === 4) return danger;
+                            return textMuted;
+                        },
+                        formatter: v => v + '%'
+                    }
+                },
+                scales: {
+                    x: { display: false, max: 55 },
+                    y: { grid: { display: false }, ticks: { font: { size: 12 } } }
+                }
+            }
+        });
+
+        // Section 3: HIC vs Luxury trend — highlight divergence
+        new Chart(document.getElementById('hicChart'), {
+            type: 'line',
+            data: {
+                labels: ['Jul \'25', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan \'26', 'Feb'],
+                datasets: [
+                    {
+                        label: 'High Income Cities',
+                        data: [75, 217, 291, 250, 316, 294, 340, 227],
+                        borderColor: danger,
+                        backgroundColor: 'transparent',
+                        tension: 0.35,
+                        pointRadius: 4,
+                        pointBackgroundColor: danger,
+                        borderWidth: 2.5
+                    },
+                    {
+                        label: 'Luxury Vehicle-Type',
+                        data: [60, 139, 190, 230, 232, 215, 211, 166],
+                        borderColor: success,
+                        backgroundColor: 'transparent',
+                        tension: 0.35,
+                        pointRadius: 4,
+                        pointBackgroundColor: success,
+                        borderWidth: 2.5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, font: { weight: 600, size: 12 }, padding: 20 } },
+                    datalabels: {
+                        display: function(ctx) {
+                            return ctx.dataIndex === 6;
+                        },
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 6,
+                        font: { weight: 700, size: 12 },
+                        color: function(ctx) { return ctx.datasetIndex === 0 ? danger : success; },
+                        formatter: v => '$' + v
+                    }
+                },
+                scales: {
+                    y: { grid: { color: grayLight }, ticks: { callback: v => '$' + v, font: { size: 11 } }, min: 0 },
+                    x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+                }
+            }
+        });
+
+        // Section 6: Vehicle-type campaign performance
+        new Chart(document.getElementById('vehicleChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Sprinter Vans', 'Camper Vans', 'Conquest', 'Mercedes / Conv.', 'RVs', 'HIC', 'Mobility Vans'],
+                datasets: [
+                    {
+                        label: 'Cost/Conversion',
+                        data: [126, 163, 152, 215, 212, 235, 253],
+                        backgroundColor: [success, accent, accent, accent, gray, danger, danger],
+                        borderRadius: 5,
+                        barPercentage: 0.65
+                    },
+                    {
+                        label: 'CPC',
+                        data: [1.86, 2.25, 2.14, 2.55, 4.72, 2.86, 3.36],
+                        backgroundColor: 'rgba(180, 180, 180, 0.4)',
+                        borderColor: gray,
+                        borderWidth: 1.5,
+                        borderRadius: 5,
+                        barPercentage: 0.65,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: { padding: { top: 20 } },
+                plugins: {
+                    legend: { position: 'top', labels: { usePointStyle: true, font: { weight: 600, size: 12 }, padding: 20 } },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        offset: 2,
+                        font: { weight: 700, size: 11 },
+                        color: function(ctx) {
+                            if (ctx.datasetIndex === 0) {
+                                if (ctx.dataIndex === 0) return success;
+                                if (ctx.dataIndex >= 5) return danger;
+                                return textSecondary;
+                            }
+                            return textMuted;
+                        },
+                        formatter: function(v, ctx) {
+                            if (ctx.datasetIndex === 0) return '$' + v;
+                            return '$' + v.toFixed(2);
+                        },
+                        display: function(ctx) {
+                            return ctx.datasetIndex === 0;
+                        }
+                    }
+                },
+                scales: {
+                    y: { display: false, max: 320 },
+                    y1: { display: false, max: 6, position: 'right' },
+                    x: { grid: { display: false }, ticks: { font: { size: 10.5, weight: 600 }, maxRotation: 25 } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
