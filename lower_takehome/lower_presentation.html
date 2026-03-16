@@ -161,6 +161,14 @@
         .rec-title { font-size: 16px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
         .rec-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
         .rec-metric { font-size: 16px; font-weight: 700; color: var(--accent); margin-top: 10px; }
+        .rec-card.highlight {
+            border: 2px solid var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,0.08);
+        }
+        .rec-badge {
+            display: inline-block; background: var(--accent); color: white; font-size: 10px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+        }
 
         .funnel-bar-container { margin: 12px 0; }
         .funnel-row {
@@ -223,7 +231,7 @@
         <div class="header">
             <div class="header-brand">Consumer Contact Strategy</div>
             <h1>Turning Dials into Funded Loans</h1>
-            <p>An analysis of 35,169 DTC leads and 291,000+ outbound call attempts to identify how Lower can optimize its contact strategy to increase funded loan volume.</p>
+            <p>Lower generates 35,169 leads per quarter. The problem isn't volume — it's that <strong>81% of outbound dials are spent on leads the team never reaches.</strong> This analysis examines 291,000+ call attempts to pinpoint where dialing capacity is being lost and how to reclaim it.</p>
             <div class="header-meta">Truett Bloxsom &nbsp;·&nbsp; Data: Nov 2025 – Jan 2026 &nbsp;·&nbsp; Pool A Outbound Dials</div>
         </div>
 
@@ -267,12 +275,7 @@
                 </div>
             </div>
 
-            <div class="comparison-grid three-col">
-                <div class="comparison-card">
-                    <div class="comparison-label">Never Called</div>
-                    <div class="comparison-value muted">11.8%</div>
-                    <div class="comparison-detail">4,153 leads excluded per business rules (Nurture status)</div>
-                </div>
+            <div class="comparison-grid">
                 <div class="comparison-card" style="border-color: var(--danger);">
                     <div class="comparison-label">Called but Never Contacted</div>
                     <div class="comparison-value bad">38.2%</div>
@@ -286,7 +289,7 @@
             </div>
 
             <div class="insight-box danger">
-                <div class="insight-text"><strong>The core challenge:</strong> More than 1 in 3 leads that enter the calling queue are dialed repeatedly but never reached. This is where the biggest efficiency opportunity lies.</div>
+                <div class="insight-text"><strong>The core problem is dialing inefficiency, not lead volume.</strong> 38% of leads are called but never contacted, and 81% of total dials go toward leads that never convert. Reclaiming that wasted capacity is the single largest lever to increase funded loans.</div>
             </div>
         </div>
 
@@ -462,7 +465,11 @@
             </div>
 
             <div class="insight-box">
-                <div class="insight-text"><strong>Weekends are the biggest untapped window.</strong> Weekend contact rates are 9.9% (3x weekday) but dial volume is 10–15x lower due to only ~3 reps on shift. Weekends still generate ~55% of the daily lead volume that weekdays do — those leads deserve comparable coverage. Note: the 8–9 AM contact rate spike is a composition effect (70% early-attempt dials vs 25% midday), not a true time-of-day advantage.</div>
+                <div class="insight-text"><strong>Speed to contact is a direct revenue lever.</strong> Shifting dialing capacity from late attempts (11–20) to early contact on fresh leads improves both speed-to-contact and conversion probability. Day 0 contacts fund at 0.88% — by Day 5+, the funded rate drops to ~0%. Every dial reclaimed from a low-probability attempt and redirected to a same-day first contact is worth materially more in expected revenue.</div>
+            </div>
+
+            <div class="insight-box warning">
+                <div class="insight-text"><strong>Weekends are the biggest untapped window.</strong> Weekend contact rates are 3x higher than weekdays, but dialing volume is 10–15x lower. We're under-investing in the most productive calling window. Weekends still generate ~55% of weekday lead volume — those leads deserve comparable coverage.</div>
             </div>
         </div>
 
@@ -575,10 +582,11 @@
             </div>
 
             <div class="rec-grid">
-                <div class="rec-card">
+                <div class="rec-card highlight">
+                    <div class="rec-badge">Highest ROI</div>
                     <div class="rec-number">1</div>
                     <div class="rec-title">Cap Pool A at 10 Attempts</div>
-                    <div class="rec-text">96% of funded loans come from attempts 1–5. Attempts 11–20 produce zero funded loans but consume 36% of dials. Capping at 10 frees ~103K dials to reinvest in 2,972 under-dialed leads and incoming fresh leads.</div>
+                    <div class="rec-text">Right now, agents continue dialing leads up to 20 times — even though nearly all funded loans happen in the first few attempts. Attempts 11–20 produce zero funded loans but consume 36% of total dials. By stopping after attempt 10, we reclaim ~103K dials per quarter and redirect that capacity toward fresh, high-probability leads where conversion probability is highest.</div>
                     <div class="rec-metric">Est. Impact: +$150–200K/quarter (~28 additional funded loans)</div>
                 </div>
                 <div class="rec-card">
@@ -590,13 +598,13 @@
                 <div class="rec-card">
                     <div class="rec-number">3</div>
                     <div class="rec-title">Add Weekend Staffing</div>
-                    <div class="rec-text">Weekend contact rates are 3x weekdays (9.9% vs 3.2%) but volume is 10–15x lower due to minimal staffing. Weekends still generate ~55% of weekday lead volume. Even 2–3 additional reps on Saturday and Sunday could yield disproportionate contact and conversion gains.</div>
+                    <div class="rec-text">Weekend contact rates are 3x higher than weekdays, but dialing volume is 10–15x lower. We're under-investing in the most productive window. Adding 2–3 reps on Saturday and Sunday — when leads are still coming in at ~55% of weekday volume — would yield disproportionate contact and conversion gains.</div>
                     <div class="rec-metric">Est. Impact: +$75–100K/quarter (~15 additional funded loans)</div>
                 </div>
             </div>
 
             <div class="insight-box" style="margin-top:20px;">
-                <div class="insight-text"><strong>The big idea:</strong> Lower's outbound cadence currently spends 81% of its dials on leads it never reaches. By capping low-yield late attempts, staffing high-yield weekend windows, and prioritizing high-quality channels — we estimate an incremental <strong>~$375–500K per quarter (~$1.5–2.0M/year)</strong> in funded loan revenue with minimal additional investment.</div>
+                <div class="insight-text"><strong>The big idea:</strong> The single highest-ROI change is capping Pool A at 10 attempts — this alone frees 36% of dial capacity with zero loss in funded loans. Pairing that with channel-aware prioritization and weekend staffing turns reclaimed capacity into revenue. Together, these three changes estimate an incremental <strong>~$375–500K per quarter (~$1.5–2.0M/year)</strong> in funded loan revenue.</div>
             </div>
             <div style="margin-top:10px;font-size:11px;color:var(--text-muted);text-align:center;">Estimates assume ~$6,000 blended revenue per funded loan (weighted by loan-type mix) and current baseline conversion rates. See appendix for detailed assumptions.</div>
         </div>
