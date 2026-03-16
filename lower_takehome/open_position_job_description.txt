@@ -1,0 +1,67 @@
+Here at Lower, we believe homeownership is the key to building wealth, and we’re making it easier and more accessible than ever. As a mission-driven fintech, we simplify the home-buying process through cutting-edge technology and a seamless customer experience.
+
+With tens of billions in funded home loans and top ratings on Trustpilot (4.8), Google (4.9), and Zillow (4.9), we’re a leader in the industry. But what truly sets us apart? Our people. Join us and be part of something bigger.
+
+Job Description:
+
+At our company, data isn’t just numbers on a dashboard—it’s how we make better decisions, tell better stories, and drive the business forward. We’re looking for a Senior Analyst who’s ready to step into a role where they’ll own meaningful problems, partner with leaders across the company, and push us to think differently with data. 
+
+This role is a great fit for an experienced analyst—someone who’s built trust with stakeholders, delivered real impact, and is working to make the jump from strong individual contributor to emerging leader.  You’ll spend your time digging deep into business domains, building clear reporting, and helping teams see not just what’s happening, but what to do about it. 
+
+Location: Columbus, OH or Austin, TX required with weekly in-office expectations.
+
+Compensation: $130,000-$145,000
+ 
+
+What you’ll do:
+
+Partner across product, finance, ops, customer success, and leadership to define KPIs and bring clarity to how we’re performing.
+
+Build and maintain dashboards in Looker or Domo that are trusted and can be fully utilized.
+
+Spot where performance can be optimized and help teams act on it.
+
+Tell the story behind the numbers—clear, simple, actionable.
+
+Partner with the data warehouse engineering side of the team to help write and tune custom SQL queries, new data sets, or data products as needed. 
+
+Mentor junior analysts and help raise the bar for how we approach data as a team.
+
+Who you are:
+
+3+ years working in analytics or a data-driven role 
+
+SQL skills that go beyond copy/paste—you know how to write it, debug it, and optimize it 
+
+Hands-on experience with modern data stacks (e.g., Snowflake, Redshift, dbt, Looker, Domo, etc.) 
+
+A track record of making a real difference—projects, insights, or ideas that moved the business forward 
+
+Strong communicator who can flex between execs, operators, and product teams 
+
+Business savvy—able to understand the “why” behind the numbers 
+
+Someone who’s curious, loves working with data, and has the confidence to push the business in the right direction 
+
+Prior experience in mortgage or real estate industry is a plus 
+
+Why you’ll love working at Lower:
+
+You’ll be surrounded by talented, dedicated people who believe in the company’s mission.
+
+You’ll be able to shape the future of Lower’s user experience.
+
+You’ll join a locally and nationally recognized best place to work that values promotion from within.
+
+There is opportunity for professional growth and development.
+
+What you'll get:
+
+Extended benefit offerings including medical/dental/vision, parental leave, life insurance, short- and long-term disability
+
+Paid holidays and paid time off
+
+401K with company match
+
+Discount on home mortgage refinances or purchase
+

@@ -1,0 +1,28 @@
+Hi Truett,
+The team is excited to move you forward to the case study portion of the interview process for the Sr. Analyst role at Lower! For this step, you'll complete a case study and present your findings to our interview panel. This exercise helps us understand how you approach data, analysis, and communicating insights. 
+Your interview is scheduled for Tues 3/17 from 1-1:45 CT. During this time you’ll present your findings to our interview panel: Alex Kromsov, SVP of Data & Analytics, and Richard Park, Principal Data Analyst. - I used your scheduler link to book times so let me know if this doesn't work and we can adjust accordingly!
+We recognize that this exercise requires a meaningful time investment, and we appreciate you taking the time to go through it. As a small thank you, we provide a $150 digital gift card after the case study is completed and presented, regardless of the interview outcome. We’re looking forward to seeing your approach and discussing the data with you!
+Please confirm once you’ve received this email. I'd also recommend verifying the links and attachment are working. 
+PRESENTATION CONTEXT:
+Please treat this presentation as if you’re presenting to a senior executive audience. Imagine Alex is the CEO of Lower and you’re walking through your analysis, insights, and recommendations. This presentation helps determine next steps in the interview process, so we’re excited to see how you think about the problem and communicate your findings.
+EXERCISE MATERIALS:
+You’ll find the case study attached as a PDF titled – "Consumer Contact Strategy Exercise." Please take a few minutes to review the document carefully before diving in. Alex and Richard’s contact information is included in the document (page 3) if you have questions or need clarification.
+It's almost impossible to create a perfect prompt so the team strongly encourages you to ask Richard and/or Alex for any additional information on the dataset, your interpretation of it, or any other clarifications you may need. Doing this early should help set you up for success, and possibly save you time! Feel free to reach out via email, text, or even start a group text with Alex and Richard if that’s easier for quick clarification.
+A few preemptive notes from Alex that may help as you work through the exercise:
+A few records will have activity time stamps prior to lead created timestamps.  Ignore/suppress these. It's real data and on the edges it gets messy at times.
+Our calling system is based on LIFO principle.  Last In First Out.  If you're the last person to submit a lead form to lower.com, we're going to call you FIRST. Highest priority.  That's important to call out.
+Be mindful that not every person gets 10 calls or 20 calls... you only need the 5th call if we weren't able to contact you on the 4th call and so forth.  You'll be surprised how often this trips people up!
+Our loan milestones are straightforward. There are steps in between but this is generally the flow after a lead becomes an opportunity and the Loan Officer puts them into our loan origination software.
+File Start > Sent to Processing > Conditional Approval > Clear to Close > Funded Loan.
+Data Sets
+You can access the datasets here (view access provided). We recommend downloading a local copy before starting your work.
+​DTC Leads Data Set – dim lead​
+​Call Activity Data Set – Dials​
+
+Please let us know if you have any issues accessing the files.
+TIME EXPECTATIONS:
+We encourage candidates to spend up to 5 hours on this exercise and advise not spending significantly longer than that. We’re not looking for a perfectly polished or over-engineered solution. Instead, we’re most interested in seeing how you think, how you approach the data, and how you communicate insights and recommendations within that timeframe.
+SUBMISSION:
+Please reply-all to this email with your presentation by EOD (11:59p CT) on Mon 3/16.
+Best of luck, and we’re excited to speak with you soon!
+Best,
