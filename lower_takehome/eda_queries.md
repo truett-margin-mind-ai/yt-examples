@@ -1041,17 +1041,24 @@ ORDER BY 1;
 -- Result: 2,972 leads (1,428 with just 1 attempt, 536 with 2, 343 with 3, 261 with 4, 404 with 5)
 ```
 
+**Per-dial contact rate by attempt bucket** (from query above):
+
+| Attempt Bucket | Dials | Contacts | Contact Rate |
+|---|---|---|---|
+| 1–5 | 104,644 | 7,405 | 7.08% |
+| 6–10 | 80,635 | 1,460 | 1.81% |
+| 11–20 | 103,839 | 1,170 | 1.13% |
+
 **Calculation (revised):**
-- Dials freed: ~103,000 (attempts 11–20)
+- Dials freed: 103,839 (attempts 11–20)
 - Immediately addressable: 2,972 under-dialed leads × ~3 more attempts avg = ~9K dials
 - Remaining ~94K dials serve incoming leads over time (partial utilization)
-- Conservative: apply ~50% effective utilization to freed dials = ~51,500 productive redirected dials
-- Redirected yield: 51,500 × 6% (attempts 1–5 avg contact rate) = ~3,090 contacts
-- Subtract current yield of those dials: 103K × ~1.2% = ~1,236 contacts
-- Net incremental contacts: ~1,854
-- Incremental funded loans: 1,854 × 1.1% = **~20 loans**
-- With additional lift from better lead coverage over time: **~28 loans (conservative range)**
-- **Revenue: 28 × $6,000 = ~$168K/quarter → displayed as +$150–200K/quarter**
+- Conservative: apply ~50% effective utilization to freed dials = ~51,920 productive redirected dials
+- Redirected yield: 51,920 × 7.08% (attempts 1–5 per-dial contact rate) = ~3,676 contacts
+- Subtract current yield of those dials: 103,839 × 1.13% (attempts 11–20 per-dial contact rate) = ~1,173 contacts
+- Net incremental contacts: ~2,503
+- Incremental funded loans: 2,503 × 1.1% (baseline funded-per-contact rate) = ~28 loans
+- **Revenue: 28 × $6,000 = ~$165K/quarter → displayed as +$120–170K/quarter**
 
 ### 8b. Rec 2 — Add Weekend Staffing
 
@@ -1078,7 +1085,7 @@ GROUP BY 1;
 
 ### 8c. Rec 3 — Channel-Aware Prioritization
 
-**Logic:** Direct/Organic (2.15% funded) and Paid Spend (1.05% funded) currently wait the same ~10–13 hours as low-value channels. Faster contact on high-value channels should improve funded rate by an estimated 15–20%.
+**Logic:** Direct/Organic (2.15% funded) and Paid Spend (1.05% funded) currently wait the same ~10–13 hours as low-value channels. Faster contact on high-value channels should improve funded rate. Conservative 10% uplift estimate based on Day 0 vs Day 1+ funded rate differential (0.88% vs 0.59%).
 
 ```sql
 -- Channel segment funded rates and lead counts
@@ -1093,10 +1100,10 @@ ORDER BY funded_rate_pct DESC;
 ```
 
 **Calculation:**
-- Direct/Organic: 3,903 leads × 2.15% funded × 17.5% uplift = **~15 additional loans**
-- Paid Spend: 6,977 leads × 1.05% funded × 17.5% uplift = **~13 additional loans**
-- Total: **~28 loans**
-- **Revenue: 28 × $6,000 = ~$170K/quarter → displayed as +$150–200K/quarter**
+- Direct/Organic: 3,903 leads × 2.15% funded rate × 10% uplift = 3,903 × 0.00215 × 0.10 = ~8 additional loans
+- Paid Spend: 6,977 leads × 1.05% funded rate × 10% uplift = 6,977 × 0.00105 × 0.10 = ~7 additional loans
+- Total: ~15 loans
+- **Revenue: 15 × $6,000 = ~$90K/quarter → displayed as +$75–100K/quarter**
 
 ### 8d. ~~Rec 4 — Protect the Golden Hour (REMOVED)~~
 
@@ -1129,9 +1136,9 @@ ORDER BY 1, 2;
 
 | Recommendation | Incremental Funded Loans | Est. Revenue/Quarter |
 |---|---|---|
-| 1. Cap at 10 Attempts | ~28 | +$150–200K |
-| 2. Weekend Staffing | ~15 | +$75–100K |
-| 3. Channel Prioritization | ~28 | +$150–200K |
-| **Combined** | **~71** | **~$375–500K/quarter (~$1.5–2.0M/year)** |
+| 1. Cap at 10 Attempts | ~28 | +$120–170K |
+| 2. Channel Prioritization | ~15 | +$75–100K |
+| 3. Weekend Staffing | ~15 | +$75–100K |
+| **Combined** | **~58** | **~$270–370K/quarter (~$1.1–1.5M/year)** |
 
 All estimates use blended $6,000 revenue per funded loan and current baseline conversion rates. These are order-of-magnitude estimates intended to size the opportunity — actual impact depends on implementation quality and market conditions.

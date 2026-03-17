@@ -525,38 +525,67 @@ ORDER BY funded_rate DESC;
 
 **Baseline conversion: funded-per-contact rate = 194 / 17,619 = ~1.1%**
 
-### Rec 1: Cap Pool A at 10 Attempts — Est. +$150–200K/quarter
+**Per-dial contact rate by attempt bucket:**
 
-- 103K dials freed from attempts 11–20 (zero funded loan output)
+```sql
+SELECT
+  CASE
+    WHEN `Pool A Call Attempt Number` BETWEEN 1 AND 5 THEN '1-5'
+    WHEN `Pool A Call Attempt Number` BETWEEN 6 AND 10 THEN '6-10'
+    WHEN `Pool A Call Attempt Number` BETWEEN 11 AND 20 THEN '11-20'
+  END AS attempt_bucket,
+  COUNT(*) AS dials,
+  COUNTIF(`Contacted_ _Yes _ No_` = true) AS contacts,
+  ROUND(COUNTIF(`Contacted_ _Yes _ No_` = true) / COUNT(*) * 100, 2) AS contact_rate_pct
+FROM `inventory-analytics-475119.testing.fct_dials`
+WHERE `Is Pool A _Active SDR__ _Yes _ No_` = true
+  AND `Pool A Call Attempt Number` BETWEEN 1 AND 20
+  AND `Lead ID` IS NOT NULL
+GROUP BY 1
+ORDER BY 1;
+```
+
+| Attempt Bucket | Dials | Contacts | Contact Rate |
+|---|---|---|---|
+| 1–5 | 104,644 | 7,405 | 7.08% |
+| 6–10 | 80,635 | 1,460 | 1.81% |
+| 11–20 | 103,839 | 1,170 | 1.13% |
+
+### Rec 1: Cap Pool A at 10 Attempts — Est. +$120–170K/quarter
+
+- 103,839 dials freed from attempts 11–20 (zero funded loan output)
 - Addressable pool: 2,972 under-dialed leads (<5 attempts, never contacted)
-- ~50% utilization discount applied (not all freed dials are immediately productive)
-- ~51,500 productive redirected dials × 6% contact rate = ~3,090 contacts
-- Net incremental (minus current yield): ~1,854 contacts
-- Incremental funded: ~28 loans × $6,000 = **~$168K/quarter**
+- ~50% utilization discount (not all freed dials are immediately productive — only 2,972 under-dialed leads are immediately addressable; remainder serves incoming fresh leads over time)
+- 51,920 productive redirected dials × 7.08% contact rate (attempts 1–5 avg) = ~3,676 contacts
+- Minus current yield of those dials: 103,839 × 1.13% contact rate (attempts 11–20 avg) = ~1,173 contacts
+- Net incremental contacts: ~2,503
+- Incremental funded loans: 2,503 × 1.1% funded-per-contact = ~28 loans
+- Revenue: 28 × $6,000 = **~$165K/quarter → displayed as +$120–170K/quarter**
 
-### Rec 2: Implement Channel-Aware Prioritization — Est. +$150–200K/quarter
+### Rec 2: Implement Channel-Aware Prioritization — Est. +$75–100K/quarter
 
-- Direct/Organic (2.15% funded) + Paid Spend (1.05% funded) currently wait ~10–13 hrs
-- 15–20% uplift in funded rate from faster contact on high-value channels:
-  - Direct/Organic: 3,903 × 2.15% × 17.5% uplift = ~15 additional loans
-  - Paid Spend: 6,977 × 1.05% × 17.5% uplift = ~13 additional loans
-- Total: ~28 loans × $6,000 = **~$170K/quarter**
+- Direct/Organic (2.15% funded) + Paid Spend (1.05% funded) currently wait ~10–13 hrs median
+- Conservative 10% uplift in funded rate from faster contact on high-value channels (based on Day 0 vs Day 1+ funded rate differential: 0.88% vs 0.59%)
+  - Direct/Organic: 3,903 leads × 2.15% current funded rate × 10% uplift = 3,903 × 0.00215 × 0.10 = ~8 additional loans
+  - Paid Spend: 6,977 leads × 1.05% current funded rate × 10% uplift = 6,977 × 0.00105 × 0.10 = ~7 additional loans
+- Total: ~15 loans × $6,000 = **~$90K/quarter → displayed as +$75–100K/quarter**
 
 ### Rec 3: Add Weekend Staffing — Est. +$75–100K/quarter
 
-- Current weekend dials: ~13,700 at 9.9% contact rate
+- Current weekend dials: ~13,700 at 9.9% contact rate = ~1,356 contacts
 - Weekends generate ~55% of weekday daily lead volume (3,100–3,200 leads/day)
-- Adding 2–3 reps could roughly double weekend dial volume
+- Adding 2–3 reps could roughly double weekend dial volume: +13,700 additional dials
 - Additional contacts: 13,700 × 9.9% = ~1,356
-- Incremental funded: ~15 loans × $6,000 = **~$90K/quarter**
+- Incremental funded loans: 1,356 × 1.1% funded-per-contact = ~15 loans
+- Revenue: 15 × $6,000 = **~$90K/quarter → displayed as +$75–100K/quarter**
 
 ### Combined estimate
 
 | Recommendation | Incremental Funded Loans | Est. Revenue/Quarter |
 |---|---|---|
-| 1. Cap at 10 Attempts | ~28 | +$150–200K |
-| 2. Channel Prioritization | ~28 | +$150–200K |
+| 1. Cap at 10 Attempts | ~28 | +$120–170K |
+| 2. Channel Prioritization | ~15 | +$75–100K |
 | 3. Weekend Staffing | ~15 | +$75–100K |
-| **Combined** | **~71** | **~$375–500K/quarter (~$1.5–2.0M/year)** |
+| **Combined** | **~58** | **~$270–370K/quarter (~$1.1–1.5M/year)** |
 
 All estimates use blended $6,000 revenue per funded loan and current baseline conversion rates. These are order-of-magnitude estimates intended to size the opportunity.
